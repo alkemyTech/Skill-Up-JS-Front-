@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import Example from "./Example";
+import React, { useState } from 'react'
+import Example from './Example'
 
 const ExampleContainer = () => {
-  const [exampleProp] = useState("Hello World");
-  
+  const [exampleProp] = useState('Hello World')
   return (
     <>
       <Example props={exampleProp} />
     </>
-  );
-};
+  )
+}
 
-export default ExampleContainer;
+export default ExampleContainer

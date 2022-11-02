@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-    "author": "gabodmc",
+  "author": "gabodmc",
   "homepage": "https://github.com/gabodmc/front-js-template-alkemy#readme",
   "scripts": {
     "dev": "vite",
@@ -12,12 +12,19 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
+    "eslint": "^8.26.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.4.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.10",
     "vite": "^3.1.0"
   }
 }
