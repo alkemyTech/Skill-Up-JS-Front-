@@ -1,18 +1,18 @@
-import { GET_CATEGORIES } from "./actions/types";
+import { GET_CATEGORIES } from './actions/types'
 
 const initialState = {
-    categories: [],
+  categories: []
 }
 
-function rootReducer (state=initialState, {type, payload}){
-    switch(type){
-        case GET_CATEGORIES: return{
-            ...state,
-            categories: payload
-        }
-
-        default: return state
+function rootReducer (state = initialState, { type, payload }) {
+  switch (type) {
+    case GET_CATEGORIES: return {
+      ...state,
+      categories: payload
     }
+
+    default: return state
+  }
 }
 
-export default rootReducer;
+export default rootReducer
