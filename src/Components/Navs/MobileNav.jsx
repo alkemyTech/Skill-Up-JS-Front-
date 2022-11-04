@@ -1,13 +1,18 @@
 import { AppBar, Avatar, Box, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Container } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CustomNavLink } from './CustomNavLink'
 
-export const MobileNav = ({ pages }) => {
+export const MobileNav = ({ pages, img }) => {
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (open) document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = 'visible'
+    }
+  }, [open])
   const theme = useTheme()
-  console.log(theme)
   return (
     <>
       <AppBar
@@ -37,7 +42,7 @@ export const MobileNav = ({ pages }) => {
               height: 31,
               cursor: 'pointer'
             }}
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&psig=AOvVaw2j8ai91nGcXhIh7Eg5x61T&ust=1667591752874000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCIC_wcHlkvsCFQAAAAAdAAAAABAE"
+            src={img}
           />
         </Container>
       </AppBar>
@@ -50,7 +55,7 @@ export const MobileNav = ({ pages }) => {
         <div className="mobilenav_links">
 
           {pages.map((page) => (
-            <CustomNavLink page={page} key={page}/>
+            <CustomNavLink page={page} key={page.route}/>
           ))}
             </div>
       </Box>

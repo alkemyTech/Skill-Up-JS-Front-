@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 export const CustomNavLink = ({ page }) => {
   const theme = useTheme()
+  console.log(theme)
   return (
     <NavLink
               key={page.route}
@@ -15,14 +16,14 @@ export const CustomNavLink = ({ page }) => {
 
                     }
                   : {
-                      color: theme.palette.grey[600]
+                      color: '#000'
                     }
               }
               className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}
               to={page.route}
               end
             >
-                <Icon>star</Icon>
+                <Icon sx={{ fontSize: 17 }}>{page.icon}</Icon>
              {page.text}
             </NavLink>
   )
