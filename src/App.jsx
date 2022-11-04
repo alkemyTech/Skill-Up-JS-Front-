@@ -14,13 +14,16 @@ function App () {
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Error404 />} />
+          <Route element={<Home />} >
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
           <Route element={<Navbar />}>
             <Route path="/Balance" element={<Balance />} />
           </Route>
+
+          <Route path="*" element={<Error404 />} />
+
         </Routes>
       </CssBaseline>
     </ThemeProvider>
