@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material'
+import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
@@ -15,13 +15,13 @@ export const Navbar = () => {
     route: 'balance',
     icon: 'account_balance'
   }, {
-    text: 'Cargar',
-    route: 'addmoney',
-    icon: 'account_balance'
+    text: 'Movimientos',
+    route: 'movements',
+    icon: 'trending_up'
   }, {
     text: 'Enviar',
-    route: 'sendomoney',
-    icon: 'account_balance'
+    route: 'send',
+    icon: 'groups'
   }]
   const sampleImg = 'https://via.placeholder.com/150/92c952'
 
@@ -33,12 +33,19 @@ export const Navbar = () => {
   return (
     <div className={match ? 'pageWrapper' : ''}>
       {match ? <SideNav {...propPack}/> : <MobileNav {...propPack}/>}
-      <div className={match ? 'outlet_container' : ''}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        width: '100%',
+        minHeight: '100vh',
+        paddingTop: { md: '40px' }
+      }}>
         <Container>
           <Outlet />
         </Container>
         <Footer/>
-      </div>
+      </Box>
     </div>
   )
 }

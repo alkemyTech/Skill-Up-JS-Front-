@@ -5,15 +5,14 @@ import { NavLink } from 'react-router-dom'
 
 export const CustomNavLink = ({ page }) => {
   const theme = useTheme()
-  console.log(theme)
   return (
     <NavLink
               key={page.route}
               style={({ isActive }) =>
                 isActive
                   ? {
-                      color: theme.palette.primary.main
-
+                      color: theme.palette.primary.main,
+                      backgroundColor: theme.palette.surfaces.four
                     }
                   : {
                       color: '#000'

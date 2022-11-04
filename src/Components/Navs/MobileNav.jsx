@@ -12,6 +12,7 @@ export const MobileNav = ({ pages, img }) => {
       document.body.style.overflow = 'visible'
     }
   }, [open])
+
   const theme = useTheme()
   return (
     <>
@@ -24,7 +25,6 @@ export const MobileNav = ({ pages, img }) => {
         }}
       >
         <Container
-          className="navbar_container"
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -34,7 +34,6 @@ export const MobileNav = ({ pages, img }) => {
           <Typography variant="h6" noWrap color="primary">
             AlkyBank
           </Typography>
-
           <Avatar
             onClick={() => setOpen((prev) => !prev)}
             sx={{
@@ -52,12 +51,12 @@ export const MobileNav = ({ pages, img }) => {
           backgroundColor: theme.palette.background.default
         }}
       >
-        <div className="mobilenav_links">
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
 
           {pages.map((page) => (
             <CustomNavLink page={page} key={page.route}/>
           ))}
-            </div>
+            </Box>
       </Box>
     </>
   )

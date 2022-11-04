@@ -2,9 +2,6 @@
   display: flex;
 }
 
-.navbar {
-  box-shadow: none !important;
-}
 
 .navbar_menu {
   width: 100vw;
@@ -22,13 +19,9 @@
   z-index: 1000;
 }
 
-.mobilenav_links {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .sidenav {
-  background-color: #0060a405;
   height: 100vh;
   position: sticky;
   top: 0;
@@ -55,9 +48,7 @@
   width: 100%;
 }
 
-.navlink.active {
-  background-color: #0060a414;
-}
+
 
 .outlet_container {
   display: flex;
