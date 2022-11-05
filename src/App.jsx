@@ -6,7 +6,9 @@ import { Balance } from './pages/Balance/Balance'
 import { Error404 } from './pages/Error404'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
+import { Movements } from './pages/Movements'
 import { Register } from './pages/Register'
+import { Send } from './pages/Send/Send'
 import theme from './styles/muiTheme'
 
 function App () {
@@ -20,6 +22,9 @@ function App () {
           </Route>
           <Route element={<Navbar />}>
             <Route path="/Balance" element={<Balance />} />
+            <Route path="/Movements" element={<Movements />} />
+            <Route path="/send" element={<Send />} />
+
           </Route>
 
           <Route path="*" element={<Error404 />} />

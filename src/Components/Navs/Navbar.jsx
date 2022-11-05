@@ -23,11 +23,10 @@ export const Navbar = () => {
     route: 'send',
     icon: 'groups'
   }]
-  const sampleImg = 'https://via.placeholder.com/150/92c952'
 
   const propPack = {
     pages,
-    img: sampleImg
+    img: ''
   }
 
   return (

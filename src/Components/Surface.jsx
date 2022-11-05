@@ -9,7 +9,9 @@ export const Surface = ({ children, deep }) => {
       padding: '20px',
       borderRadius: '20px',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      gap: '20px',
+      width: '100%'
     }}>
         {children}
     </Box>

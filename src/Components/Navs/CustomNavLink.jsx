@@ -3,7 +3,7 @@ import Icon from '@mui/material/Icon'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const CustomNavLink = ({ page }) => {
+export const CustomNavLink = ({ page, onClick }) => {
   const theme = useTheme()
   return (
     <NavLink
@@ -21,6 +21,7 @@ export const CustomNavLink = ({ page }) => {
               className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}
               to={page.route}
               end
+              onClick={onClick}
             >
                 <Icon sx={{ fontSize: 17 }}>{page.icon}</Icon>
              {page.text}

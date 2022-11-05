@@ -54,7 +54,7 @@ export const MobileNav = ({ pages, img }) => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
 
           {pages.map((page) => (
-            <CustomNavLink page={page} key={page.route}/>
+            <CustomNavLink page={page} key={page.route} onClick={() => setOpen(false)}/>
           ))}
             </Box>
       </Box>

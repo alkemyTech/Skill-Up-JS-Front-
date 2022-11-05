@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
@@ -28,7 +28,9 @@ export const Home = () => {
         }}>
 
           <Typography variant="h4" color="primary.main">AlkyBank</Typography>
-        <Outlet />
+          <Box sx={{ width: '75%' }}>
+            <Outlet />
+          </Box>
         </Container >
       </Grid>
     </Grid>
