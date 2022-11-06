@@ -6,12 +6,13 @@ import { Link as RouterLink } from 'react-router-dom'
 export const Login = () => {
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h6" textAlign={'center'}>Inicia sesión para ingresar a tu cuenta</Typography>
-      <Typography textAlign={'right'}>¿No tienes cuenta?
-        <Link
-        to="register"
-        component={RouterLink}
-        underline="none">¡Registrate!
+      <Typography variant='h6' textAlign={'center'}>
+        Inicia sesión para ingresar a tu cuenta
+      </Typography>
+      <Typography textAlign={'right'}>
+        ¿No tienes cuenta?
+        <Link to='register' component={RouterLink} underline='none'>
+          ¡Registrate!
         </Link>
       </Typography>
     </Box>

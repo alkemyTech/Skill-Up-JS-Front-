@@ -5,7 +5,6 @@ export const MoneyMove = ({ variant, data }) => {
   let icon = ''
   let baseStyle = {}
 
-  console.log(variant)
   switch (variant) {
     case 'income':
       baseStyle = {
@@ -34,37 +33,44 @@ export const MoneyMove = ({ variant, data }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <Box sx={{
-              display: 'flex',
-              alignItems:
-            'center',
-              justifyContent:
-            'center',
-              borderRadius: '50%',
-              backgroundColor: baseStyle.bgColor,
-              color: baseStyle.color,
-              width: '57px',
-              height: '57px'
-            }}>
-                <Icon>
-                {icon}
-                </Icon>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="subtitle2">{data.description}</Typography>
-                <Typography color="grey.400">{data.date}</Typography>
-            </Box>
-
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%'
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            backgroundColor: baseStyle.bgColor,
+            color: baseStyle.color,
+            width: '57px',
+            height: '57px'
+          }}
+        >
+          <Icon>{icon}</Icon>
         </Box>
-        <div>
-            <Typography variant="subtitle2" color={baseStyle.color}
-            sx={baseStyle.money}
-           >
-                {variant === 'outcome' && '-'}{data.amount}
-            </Typography>
-        </div>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography variant='subtitle2'>{data.description}</Typography>
+          <Typography color='grey.400'>{data.date}</Typography>
+        </Box>
+      </Box>
+      <div>
+        <Typography
+          variant='subtitle2'
+          color={baseStyle.color}
+          sx={baseStyle.money}
+        >
+          {variant === 'outcome' && '-'}
+          {data.amount}
+        </Typography>
+      </div>
     </Box>
   )
 }

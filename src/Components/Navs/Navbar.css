@@ -2,7 +2,6 @@
   display: flex;
 }
 
-
 .navbar_menu {
   width: 100vw;
   position: absolute;
@@ -18,8 +17,6 @@
   bottom: 0;
   z-index: 1000;
 }
-
-
 
 .sidenav {
   height: 100vh;
@@ -47,8 +44,6 @@
   text-decoration: none;
   width: 100%;
 }
-
-
 
 .outlet_container {
   display: flex;

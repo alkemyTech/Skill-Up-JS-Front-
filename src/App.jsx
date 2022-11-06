@@ -16,19 +16,17 @@ function App () {
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <Routes>
-          <Route element={<Home />} >
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+          <Route element={<Home />}>
+            <Route path='/' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Route>
           <Route element={<Navbar />}>
-            <Route path="/Balance" element={<Balance />} />
-            <Route path="/Movements" element={<Movements />} />
-            <Route path="/send" element={<Send />} />
-
+            <Route path='/Balance' element={<Balance />} />
+            <Route path='/Movements' element={<Movements />} />
+            <Route path='/send' element={<Send />} />
           </Route>
 
-          <Route path="*" element={<Error404 />} />
-
+          <Route path='*' element={<Error404 />} />
         </Routes>
       </CssBaseline>
     </ThemeProvider>

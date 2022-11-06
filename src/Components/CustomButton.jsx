@@ -10,8 +10,8 @@ export const CustomButton = ({ children, color, textColor, onClick }) => {
     borderRadius: 20
   }))
   return (
-    <StyledButton variant="contained" disableElevation onClick={onClick} >
-        {children}
+    <StyledButton variant='contained' disableElevation onClick={onClick}>
+      {children}
     </StyledButton>
   )
 }

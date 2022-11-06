@@ -13,12 +13,22 @@ export const CircleButton = ({ icon, onClick, text }) => {
     borderRadius: '50%'
   }))
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-        <StyledButton variant="contained" onClick={onClick}
-        style={{ backgroundColor: theme.palette.surfaces.four }}>
-           <Icon sx={{ fontSize: '27px' }}>{icon}</Icon>
-        </StyledButton>
-        {text}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '10px'
+      }}
+    >
+      <StyledButton
+        variant='contained'
+        onClick={onClick}
+        style={{ backgroundColor: theme.palette.surfaces.four }}
+      >
+        <Icon sx={{ fontSize: '27px' }}>{icon}</Icon>
+      </StyledButton>
+      {text}
     </Box>
   )
 }

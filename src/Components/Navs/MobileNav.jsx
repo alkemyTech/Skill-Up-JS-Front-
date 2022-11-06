@@ -17,8 +17,8 @@ export const MobileNav = ({ pages, img }) => {
   return (
     <>
       <AppBar
-        position="static"
-        color="transparent"
+        position='static'
+        color='transparent'
         elevation={0}
         sx={{
           padding: '20px 0'
@@ -31,7 +31,7 @@ export const MobileNav = ({ pages, img }) => {
             alignItems: 'center'
           }}
         >
-          <Typography variant="h6" noWrap color="primary">
+          <Typography variant='h6' noWrap color='primary'>
             AlkyBank
           </Typography>
           <Avatar
@@ -52,11 +52,14 @@ export const MobileNav = ({ pages, img }) => {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-
           {pages.map((page) => (
-            <CustomNavLink page={page} key={page.route} onClick={() => setOpen(false)}/>
+            <CustomNavLink
+              page={page}
+              key={page.route}
+              onClick={() => setOpen(false)}
+            />
           ))}
-            </Box>
+        </Box>
       </Box>
     </>
   )
