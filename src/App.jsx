@@ -8,6 +8,7 @@ import SecondScreen from './Screens/SecondScreen'
 // import NotFoundScreen from './Screens/404Screen'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TransactionForm from './Components/Transactions/TransactionsForm'
 
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path={'/'} element={ <HomeScreen /> } />
+          <Route exact path={'/'} element={ <HomeScreen /> } />
           <Route path={'/news'} element={ <SecondScreen /> } />
+          <Route exact path={'/transactions'} element={ <TransactionForm /> } />
         </Routes>
       </Layout>
     </BrowserRouter>
