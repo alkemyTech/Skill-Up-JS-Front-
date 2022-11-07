@@ -5,6 +5,7 @@ import { FiSend } from 'react-icons/fi'
 import { GiPayMoney } from 'react-icons/gi'
 import { GrTransaction } from 'react-icons/gr'
 import { AiOutlineTransaction } from 'react-icons/ai'
+import { CgProfile, CgLogOut } from 'react-icons/cg'
 
 export const Navbar = () => {
 
@@ -16,7 +17,7 @@ export const Navbar = () => {
         <h1 className='text-3xl text-right'>Wallet</h1>
       </div>
 
-      <div className='mt-8 flex flex-col'>
+      <div className='mt-8 flex flex-col flex-1'>
 
         <NavLink to='/transactions' activeClassName={active}>
           <div className='flex items-center pl-6'>
@@ -51,6 +52,23 @@ export const Navbar = () => {
           <div className='flex items-center pl-6'>
             <FiSend />
             <span className='pl-6 font-bold'>Send Money</span>
+
+          </div>
+        </NavLink>
+      </div>
+      <hr className='my-4 mx-10 h-[2px] bg-black' />
+      <div className='flex flex-col mb-12'>
+        <NavLink to='/profile' activeClassName={active}>
+          <div className='flex items-center pl-6'>
+            <CgProfile />
+            <span className='pl-6 font-bold'>Profile</span>
+
+          </div>
+        </NavLink>
+        <NavLink to='/logout' activeClassName={active}>
+          <div className='flex items-center pl-6'>
+            <CgLogOut />
+            <span className='pl-6 font-bold'>Logout</span>
 
           </div>
         </NavLink>
