@@ -1,5 +1,5 @@
 import React from "react";
-import './Boton.css';
+
 
 const Boton = (text, color) => {
 
@@ -18,4 +18,4 @@ const Boton = (text, color) => {
   );
 };
 
-export default Boton;
+  export default Boton;
