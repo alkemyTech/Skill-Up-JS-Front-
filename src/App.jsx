@@ -17,14 +17,20 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route exact path={'/'} element={ <HomeScreen /> } />
-          <Route path={'/news'} element={ <SecondScreen /> } />
-          <Route exact path={'/transactions'} element={ <TransactionForm /> } />
+
+          <Route path={'/'} element={<HomeScreen />} />
+          <Route path={'/news'} element={<SecondScreen />} />
+          <Route path='/transactions' element={<TransactionForm />} />
+          <Route path='/deposit' element={<HomeScreen />} />
+          <Route path='/pay' element={<HomeScreen />} />
+          <Route path='/balance' element={<HomeScreen />} />
+          <Route path='/send' element={<HomeScreen />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
   )
-  
+
 }
 
 export default App
