@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import Boton from "../Boton";
 import "./transactionsForm.css";
 import axios from "axios";
+import { useGetTransactionsQuery } from "../../store/transactionSlice";
 
 
 const TransactionForm = () => {
-  
+  const { data, isSuccess, isLoading, isError, error } = useGetTransactionsQuery()
+
+  if (isLoading) return <p>Loading....</p>
+
+  if (isSuccess) {
+    console.log(data)
+  }
   return (
     <div>
       <h1>New transaction</h1>
@@ -17,9 +24,9 @@ const TransactionForm = () => {
           amount: "",
           currency: "",
           date: "",
-          userId:"",
-          categoryId:"",
-          type:"",
+          userId: "",
+          categoryId: "",
+          type: "",
         }}
         validate={(values) => {
           let errores = {};
@@ -34,7 +41,7 @@ const TransactionForm = () => {
           return errores;
         }}
         onSubmit={(formValues) => {
-            axios.post('http://localhost:3000/transactions',formValues)
+          axios.post('http://localhost:3000/transactions', formValues)
           console.log(formValues);
         }}
       >
