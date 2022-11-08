@@ -21,10 +21,14 @@ export const transactionApiSlice = apiSlice.injectEndpoints({
       ]
     }),
     getTransactions: builder.query({
-      query: () => ({
-        url: '/transactions',
-        method: 'GET',
-      }),
+      query: (args) => {
+        const { categoryId, description, currency } = args
+        return {
+          url: '/transactions',
+          method: 'GET',
+          params: { categoryId, description, currency }
+        }
+      },
       provideTags: (result, error, arg) => {
         if (result?.ids) {
           return [
@@ -36,7 +40,7 @@ export const transactionApiSlice = apiSlice.injectEndpoints({
     }),
     editTransaction: builder.mutation({
       query: (data) => ({
-        url: `/transaction/${data.id}`
+        url: `/transaction/${data.id}`,
         method: 'PUT',
         body: {
           ...data

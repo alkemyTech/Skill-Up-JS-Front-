@@ -3,11 +3,12 @@ import { Formik } from "formik";
 import Boton from "../Boton";
 import "./transactionsForm.css";
 import axios from "axios";
-import { useGetTransactionsQuery } from "../../store/transactionSlice";
-
+import { useGetTransactionsQuery } from "../../store/transactionApiSlice";
+import { useBalanceQuery } from '../../store/userApiSlice'
 
 const TransactionForm = () => {
-  const { data, isSuccess, isLoading, isError, error } = useGetTransactionsQuery()
+  // const { data, isSuccess, isLoading, isError, error } = useGetTransactionsQuery({ categoryId: "2" })
+  const { data, isSuccess, isLoading, isError, error } = useBalanceQuery({ id: 1 })
 
   if (isLoading) return <p>Loading....</p>
 
