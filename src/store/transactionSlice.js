@@ -34,8 +34,25 @@ export const transactionApiSlice = apiSlice.injectEndpoints({
         } else return [{ type: "transaction", id: 'transaction' }]
       }
     }),
+    editTransaction: builder.mutation({
+      query: (data) => ({
+        url: `/transaction/${data.id}`
+        method: 'PUT',
+        body: {
+          ...data
+        }
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'transaction', id: arg.id }]
+    }),
+    deleteTransaction: builder.mutation({
+      query: ({ id }) => ({
+        url: '/transaction',
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'transaction', id: arg.id }]
+    })
   })
 })
 
 
-export const { useCreateTransactionMutation, useGetTransactionsQuery } = transactionApiSlice
+export const { useCreateTransactionMutation, useGetTransactionsQuery, useEditTransactionMutation, useDeleteTransactionMutation } = transactionApiSlice
