@@ -10,24 +10,27 @@ import SecondScreen from "./Screens/SecondScreen";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TransactionForm from "./Components/Transactions/TransactionsForm";
 import RequireAuth from "./Components/RequireAuth";
+import Persist from "./Components/Persist";
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path={"/"} element={<HomeScreen />} />
-          <Route path={"/news"} element={<SecondScreen />} />¨
+      <Routes>
+        <Route path={"/login"} element={<HomeScreen />} />
+        <Route path={"/news"} element={<SecondScreen />} />
+        <Route element={<Persist />}>
           <Route element={<RequireAuth />}>
-            <Route path="/transactions" element={<TransactionForm />} />
-            <Route path="/deposit" element={<HomeScreen />} />
-            <Route path="/pay" element={<HomeScreen />} />
+            <Route element={<Layout />}>
+              <Route path="/" element={<TransactionForm />} />
+              <Route path="/deposit" element={<HomeScreen />} />
+              <Route path="/pay" element={<HomeScreen />} />
 
-            <Route path="/balance" element={<HomeScreen />} />
-            <Route path="/send" element={<HomeScreen />} />
+              <Route path="/balance" element={<HomeScreen />} />
+              <Route path="/send" element={<HomeScreen />} />
+            </Route>
           </Route>
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

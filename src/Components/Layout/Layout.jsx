@@ -1,24 +1,31 @@
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import { Navbar } from '../Navbar'
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { Navbar } from "../Navbar";
+import { Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/authSlice";
+import { useEffect } from "react";
 
-const Layout = ({ children }) => {
+const Layout = () => {
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    if (!user) {
+      <Navigate to="/login" replace />;
+    }
+  }, [user]);
+
   return (
-    <div className='flex h-full'>
-
-
-
+    <div className="flex h-full">
       <Navbar />
 
-      <div className='flex flex-col w-full'>
+      <div className="flex flex-col w-full">
         <Header />
-        {children}
+        <Outlet />
         <Footer />
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
