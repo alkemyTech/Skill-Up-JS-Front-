@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import Boton from "../Boton";
 import axios from "axios";
+import { useGetTransactionsQuery } from "../../store/transactionApiSlice";
+import { useBalanceQuery } from '../../store/userApiSlice'
 
 const TransactionForm = () => {
+  // const { data, isSuccess, isLoading, isError, error } = useGetTransactionsQuery({ categoryId: "2" })
+  const { data, isSuccess, isLoading, isError, error } = useBalanceQuery({ id: 1 })
+
+  if (isLoading) return <p>Loading....</p>
+
+  if (isSuccess) {
+    console.log(data)
+  }
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <h1>New transaction</h1>
@@ -32,7 +42,7 @@ const TransactionForm = () => {
           return errores;
         }}
         onSubmit={(formValues) => {
-          axios.post("http://localhost:3000/transactions", formValues);
+          axios.post('http://localhost:3000/transactions', formValues)
           console.log(formValues);
         }}
       >
