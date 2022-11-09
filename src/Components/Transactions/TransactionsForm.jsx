@@ -1,47 +1,49 @@
 import React from "react";
 import { Formik } from "formik";
 import Boton from "../Boton";
-import "./transactionsForm.css";
 import axios from "axios";
 
-
 const TransactionForm = () => {
-  
   return (
-    <div>
+    <div className="w-full flex flex-col justify-center items-center">
       <h1>New transaction</h1>
 
       <Formik
+      
         initialValues={{
           description: "",
           amount: "",
           currency: "",
           date: "",
-          userId:"",
-          categoryId:"",
-          type:"",
+          userId: "",
+          categoryId: "",
+          type: "",
         }}
         validate={(values) => {
           let errores = {};
           !values.description
-            ? (errores.description = "description must be completed")
+            ? (errores.description = "Description must be completed")
             : null;
-          !values.amount ? (errores.amount = "amount must be completed") : null;
+          !values.amount ? (errores.amount = "Amount must be completed") : null;
           values.amount && values.amount <= 0
-            ? (errores.amount = "amount must be greted than 0")
+            ? (errores.amount = "Amount must be greted than 0")
             : null;
 
           return errores;
         }}
         onSubmit={(formValues) => {
-            axios.post('http://localhost:3000/transactions',formValues)
+          axios.post("http://localhost:3000/transactions", formValues);
           console.log(formValues);
         }}
       >
         {({ handleSubmit, handleChange, handleBlur, touched, errors }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form
+            className="flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 space-y-3"
+            onSubmit={handleSubmit}
+          >
+            <div className="mb-4">
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Description"
                 id="description"
@@ -50,11 +52,12 @@ const TransactionForm = () => {
                 onBlur={handleBlur}
               />
               {touched.description && errors.description && (
-                <div className="error">{errors.description}</div>
+                <div className="text-red-500">{errors.description}</div>
               )}
             </div>
             <div>
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 placeholder="Amount"
                 id="amount"
@@ -63,12 +66,12 @@ const TransactionForm = () => {
                 onBlur={handleBlur}
               />
               {touched.amount && errors.amount && (
-                <div className="error">{errors.amount}</div>
+                <div className="text-red-500">{errors.amount}</div>
               )}
             </div>
-            <div>
-              <label>Currency </label>
-              <select name="currency" onChange={handleChange}>
+            <div className="flex flex-col justify-center intems-center">
+              <label className="text-center text-gray-700">Currency </label>
+              <select className="block text-center appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="currency" onChange={handleChange}>
                 <option value="pesos">Pesos</option>
                 <option value="dolares">Dolares</option>
                 <option value="euros">Euros</option>
@@ -76,6 +79,7 @@ const TransactionForm = () => {
             </div>
             <div>
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="date"
                 placeholder="Date"
                 id="date"
@@ -86,6 +90,7 @@ const TransactionForm = () => {
             </div>
             <div>
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 placeholder="userId"
                 name="userId"
@@ -96,6 +101,7 @@ const TransactionForm = () => {
             </div>
             <div>
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 placeholder="categoryId"
                 name="categoryId"
@@ -106,6 +112,7 @@ const TransactionForm = () => {
             </div>
             <div>
               <input
+                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="type"
                 name="type"
