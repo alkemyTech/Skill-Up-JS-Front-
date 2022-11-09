@@ -33,9 +33,7 @@ const Persist = () => {
 
   let content;
 
-  if (success) {
-    content = <Outlet />;
-  } else if (token) {
+  if (success || token) {
     content = <Outlet />;
   }
 
