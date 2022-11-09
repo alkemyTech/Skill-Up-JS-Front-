@@ -1,24 +1,21 @@
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import { Navbar } from '../Navbar'
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
+import { selectUser, setCredentials } from "../../store/authSlice";
 
-const Layout = ({ children }) => {
-  return (
-    <div className='flex h-full'>
+const InitialLayout = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const tokens = localStorage.getItem("jwt");
+    if (tokens) {
+      dispatch(setCredentials({ token: tokens }));
+      navigate("/");
+    }
+  }, []);
+  return <Outlet />;
+};
 
-
-      <Navbar />
-
-      <div className='flex flex-col w-full'>
-        <Header />
-        {children}
-        <Footer />
-
-      </div>
-
-    </div>
-  )
-}
-
-export default Layout
+export default InitialLayout;

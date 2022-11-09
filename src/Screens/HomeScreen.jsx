@@ -18,11 +18,11 @@ const HomeScreen = () => {
     try {
       const data = await login({ email, password }).unwrap();
       const { token } = data.body;
+      console.log(token);
       dispatch(setCredentials({ token }));
       setEmail("");
       setPassword("");
-
-      navigate("/transactions");
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
