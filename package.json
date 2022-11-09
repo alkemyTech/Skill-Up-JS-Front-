@@ -6,7 +6,7 @@
   "author": "gabodmc",
   "homepage": "https://github.com/gabodmc/front-js-template-alkemy#readme",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
