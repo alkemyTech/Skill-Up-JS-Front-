@@ -5,14 +5,17 @@ import { selectToken } from "../store/authSlice";
 const useAuth = () => {
   const token = useSelector(selectToken);
   console.log({ "token es": token });
+
   if (token) {
     const decoded = jwtDecode(token);
-    console.log({ "El decoded": decoded });
-    const { id } = decoded;
 
-    return { id };
+    localStorage.setItem("jwt", token);
+
+    const data = decoded;
+
+    return { data };
   }
 
-  return { id: null };
+  return { data: null };
 };
 export default useAuth;
