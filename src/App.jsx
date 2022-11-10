@@ -24,11 +24,11 @@ function App() {
             <Route element={<RequireAuth />}>
               <Route element={<TransactionLayout />}>
                 <Route path="/" element={<TransactionForm />} />
-                <Route path="/deposit" element={<HomeScreen />} />
-                <Route path="/pay" element={<HomeScreen />} />
+                <Route path="/deposit" element={<TransactionForm />} />
+                <Route path="/pay" element={<TransactionForm />} />
 
                 <Route path="/balance" element={<HomeScreen />} />
-                <Route path="/send" element={<HomeScreen />} />
+                <Route path="/send" element={<TransactionForm />} />
               </Route>
             </Route>
           </Route>

@@ -1,5 +1,5 @@
 import { createEntityAdapter } from "@reduxjs/toolkit/dist";
-import { apiSlice } from "./apislice";
+import { apiSlice } from "./apiSlice";
 
 
 const transactionAdapter = createEntityAdapter({})

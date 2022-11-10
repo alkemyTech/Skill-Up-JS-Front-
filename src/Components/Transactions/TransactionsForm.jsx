@@ -1,142 +1,114 @@
-import React, { useEffect } from "react";
-import { Formik } from "formik";
-import Boton from "../Boton";
-import axios from "axios";
-import { useGetTransactionsQuery } from "../../store/transactionApiSlice";
-import { useBalanceQuery } from '../../store/userApiSlice'
+import React from "react";
+// firstName, lastName, email, avatar, password;
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "../Form/FormikControl";
+import { useCreateTransactionMutation } from "../../store/transactionApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+// import { useState } from "react";
+// import { setCredentials } from "../../store/authSlice";
 
-const TransactionForm = () => {
-  // const { data, isSuccess, isLoading, isError, error } = useGetTransactionsQuery({ categoryId: "2" })
-  const { data, isSuccess, isLoading, isError, error } = useBalanceQuery({ id: 1 })
+export default function TransactionForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [createTransaction, { isLoading, isSuccess, isError, error }] =
+    useCreateTransactionMutation();
+  const user = useSelector((state) => state.auth);
+  const pathName = useLocation().pathname;
 
-  if (isLoading) return <p>Loading....</p>
+  const initialValues = {
+    description: "",
+    amount: "",
+    currency: "",
+    date: "",
+    userId: user.user.id,
+    categoryId: pathName === "/deposit" ? 1 : 2,
+    toUserId: "",
+  };
+  const validationSchema = Yup.object({
+    description: Yup.string().required(" Required"),
+    amount: Yup.number().required(" Required"),
+  });
+  const onSubmit = async () => {
+    try {
+      const data = await createTransaction({
+        description: description.value,
+        amount: amount.value,
+        currency: amount.value,
+        date: date.value,
+        userId: user.user.id,
+        categoryId: pathName === "/deposit" ? 1 : 2,
+        toUserId: toUserId.value,
+      }).unwrap();
+      console.log(data);
+      navigate("/transactions");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // console.log(categoryId)
 
-  if (isSuccess) {
-    console.log(data)
-  }
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <h1>New transaction</h1>
-
       <Formik
-      
-        initialValues={{
-          description: "",
-          amount: "",
-          currency: "",
-          date: "",
-          userId: "",
-          categoryId: "",
-          type: "",
-        }}
-        validate={(values) => {
-          let errores = {};
-          !values.description
-            ? (errores.description = "Description must be completed")
-            : null;
-          !values.amount ? (errores.amount = "Amount must be completed") : null;
-          values.amount && values.amount <= 0
-            ? (errores.amount = "Amount must be greted than 0")
-            : null;
-
-          return errores;
-        }}
-        onSubmit={(formValues) => {
-          axios.post('http://localhost:3000/transactions', formValues)
-          console.log(formValues);
-        }}
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
       >
-        {({ handleSubmit, handleChange, handleBlur, touched, errors }) => (
-          <form
-            className="flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 space-y-3"
-            onSubmit={handleSubmit}
-          >
-            <div className="mb-4">
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        {(formik) => (
+          <Form className="flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 space-y-3">
+            <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <FormikControl
+                control="input"
                 type="text"
-                placeholder="Description"
-                id="description"
+                placeholder="Description "
                 name="description"
-                onChange={handleChange}
-                onBlur={handleBlur}
               />
-              {touched.description && errors.description && (
-                <div className="text-red-500">{errors.description}</div>
-              )}
             </div>
-            <div>
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <FormikControl
+                control="input"
                 type="number"
                 placeholder="Amount"
-                id="amount"
                 name="amount"
-                onChange={handleChange}
-                onBlur={handleBlur}
               />
-              {touched.amount && errors.amount && (
-                <div className="text-red-500">{errors.amount}</div>
-              )}
             </div>
-            <div className="flex flex-col justify-center intems-center">
-              <label className="text-center text-gray-700">Currency </label>
-              <select className="block text-center appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="currency" onChange={handleChange}>
-                <option value="pesos">Pesos</option>
-                <option value="dolares">Dolares</option>
-                <option value="euros">Euros</option>
-              </select>
+            <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <FormikControl
+                control="input"
+                type="select"
+                placeholder="Currency "
+                name="currency"
+              />
             </div>
-            <div>
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <FormikControl
+                control="input"
                 type="date"
-                placeholder="Date"
-                id="date"
+                placeholder="Date "
                 name="date"
-                onChange={handleChange}
-                onBlur={handleBlur}
               />
             </div>
-            <div>
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="number"
-                placeholder="userId"
-                name="userId"
-                id="userId"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div>
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="number"
-                placeholder="categoryId"
-                name="categoryId"
-                id="categoryId"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div>
-              <input
-                className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="type"
-                name="type"
-                id="type"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <Boton text="acept" />
-          </form>
+            {pathName === "/send" ? (
+              <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <FormikControl
+                  control="input"
+                  type="number"
+                  placeholder="To user "
+                  name="toUserId"
+                />
+              </div>
+            ) : null}
+
+            <button type="submit" disabled={!formik.isValid}>
+              Submit
+            </button>
+            <br />
+            <button type="reset">Reset</button>
+          </Form>
         )}
       </Formik>
     </div>
   );
-};
-
-export default TransactionForm;
+}
