@@ -64,7 +64,7 @@ export const Navbar = () => {
         </div>
 
         <div className="mt-8 flex flex-col flex-1">
-          <NavLink to="/transactions" activeClassName={active}>
+          <NavLink to="/" activeClassName={active}>
             <div className="flex items-center pl-6">
               <AiOutlineTransaction />
               <span className="pl-6 font-bold">Transactions</span>
