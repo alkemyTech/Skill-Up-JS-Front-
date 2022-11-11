@@ -1,15 +1,27 @@
 import { React, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import { createUser, getUsers } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
+import * as yup from 'yup'
+import { TextField } from '@mui/material'
+import { CustomButton } from './CustomButton'
 
 export const FormUser = () => {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])
   const users = useSelector(state => state.users)
+
+  const registerSchema = yup.object().shape({
+    firstName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su nombre'),
+    lastName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su apellido'),
+    email: yup.string().email('Email invalido').required('Debe ingresar un email'),
+    password: yup.string().min(6, 'Debe tener minimo 6 caracteres').required('Debe ingresar una password'),
+    repeatPass: yup.string().oneOf([yup.ref('password')], 'Your passwords do not match.').required('La password no coincido')
+  })
 
   return (
     <div>
@@ -22,73 +34,92 @@ export const FormUser = () => {
                   password2: '',
                   avatar: ''
                 }}
-                validate={(valores) => {
-                  const errors = {}
-                  if (!valores.firstName) {
-                    errors.firstName = 'Debe completar este campo'
-                  } else if (/^\s/.test(valores.firstName)) {
-                    errors.firstName = 'No puede empezar con un espacio vacío'
-                  }
-                  if (!valores.lastName) {
-                    errors.lastName = 'Debe completar este campo'
-                  } else if (/^\s/.test(valores.lastName)) {
-                    errors.lastName = 'No puede empezar con un espacio vacío'
-                  }
-                  if (!valores.email) {
-                    errors.email = 'Debe completar este campo'
-                  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valores.email)) {
-                    errors.email = 'E-mail invalido'
-                  } else if (users.find(e => e.email.toLowerCase() === valores.email.toLowerCase())) {
-                    errors.email = 'Este mail ya se encuentra registrado'
-                  }
-                  if (!valores.password) {
-                    errors.password = 'Debe completar este campo'
-                  }
-                  if (valores.password !== valores.password2) {
-                    errors.password2 = 'Las contraseñas deben coincidir'
-                  }
-                  return errors
-                }}
-                onSubmit={(valores, { resetForm }) => {
-                  dispatch(createUser(valores))
+                validationSchema={registerSchema}
+                onSubmit={(values, { resetForm }) => {
+                  dispatch(createUser(values))
                   alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
                   resetForm()
                 }}>
-                {({ touched, errors }) => (
+                {({ touched, errors, values, handleBlur, handleChange }) => (
                     <Form>
-                        <h1>Regístrate</h1>
                         <div>
-                            <label>Nombre: </label>
-                            <Field type='text' name='firstName' placeholder='Nombre' />
-                            {touched.firstName && errors.firstName && <span>{errors.firstName}</span>}
+                        <TextField
+                          error={touched.firstName && errors.firstName}
+                          value={values.firstName}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          label="Nombre"
+                          helperText={touched.firstName && errors.firstName}
+                          variant="standard"
+                          type='text'
+                          name='firstName'
+                          fullWidth
+                          margin="dense"
+                        />
                         </div>
                         <div>
-                        <div>
-                            <label>Apellido: </label>
-                            <Field type='text' name='lastName' placeholder='Apellido' />
-                            {touched.lastName && errors.lastName && <span>{errors.lastName}</span>}
+                          <TextField
+                            error={touched.lastName && errors.lastName}
+                            value={values.lastName}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            label="Apellido"
+                            helperText={touched.lastName && errors.lastName}
+                            variant="standard"
+                            type='text'
+                            name='lastName'
+                            fullWidth
+                            margin="dense"
+                          />
                         </div>
                         <div>
-                            <label>E mail: </label>
-                            <Field type="text" name="email" placeholder="E-mail" />
-                            {touched.email && errors.email && <span>{errors.email}</span>}
+                          <TextField
+                            error={touched.email && errors.email}
+                            value={values.email}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            label="Email"
+                            helperText={touched.email && errors.email}
+                            variant="standard"
+                            type='email'
+                            name='email'
+                            fullWidth
+                            margin="dense"
+                          />
                         </div>
                         <div>
-                            <label>Contraseña: </label>
-                            <Field type="password" name="password" placeholder="Contraseña" />
-                            {touched.password && errors.password && <span>{errors.password}</span>}
+                          <TextField
+                            error={touched.password && errors.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name='password'
+                            label="Password"
+                            helperText={touched.password && errors.password}
+                            variant="standard"
+                            type='password'
+                            value={values.password}
+                            fullWidth
+                            margin="dense"
+                          />
                         </div>
                         <div>
-                            <label>Repita su contraseña: </label>
-                            <Field type="password" name="password2" placeholder="Repita contraseña" />
-                            {touched.password2 && errors.password2 && <span>{errors.password2}</span>}
+                          <TextField
+                            error={touched.repeatPass && errors.repeatPass}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name='repeatPass'
+                            label="Repetir password"
+                            helperText={touched.repeatPass && errors.repeatPass}
+                            variant="standard"
+                            type='password'
+                            value={values.repeatPass}
+                            fullWidth
+                            margin="dense"
+                          />
                         </div>
-                            <label>Avatar (opcional): </label>
-                            <Field type='text' name='avatar' placeholder='Avatar' />
-                        </div>
-                        <div>
-                            <button type='submit'>Registrarse</button>
-                        </div>
+                        <CustomButton sx={{ margin: '20px 0 10px 0' }} type="submit">
+                          Log in
+                        </CustomButton>
                     </Form>
                 )}
                 </Formik>
