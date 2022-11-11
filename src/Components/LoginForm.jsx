@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logUser, getUsers } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
 import { CustomButton } from './CustomButton'
@@ -15,7 +15,6 @@ export const LoginForm = () => {
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])
-  const users = useSelector(state => state.users)
 
   const signInSchema = yup.object().shape({
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
@@ -30,14 +29,14 @@ export const LoginForm = () => {
         }}
         validationSchema={signInSchema}
         onSubmit={(values, { resetForm }) => {
-          if (!users.find(e => e.email === values.email)) {
-            return alert.error(true, 'Error', 'Este mail no esta registrado aún')
+          try {
+            dispatch(logUser(values))
+            navigate('/')
+          } catch (e) {
+            alert.error(true, 'Error', e.message)
           }
-          dispatch(logUser(values))
-          navigate('/home')
-
-          resetForm()
-        }}>
+        }}
+        >
         {({ touched, errors, handleBlur, handleSubmit, handleChange, values }) => (
           <Form onSubmit={ handleSubmit }>
             <div>

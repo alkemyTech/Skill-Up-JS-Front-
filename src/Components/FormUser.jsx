@@ -1,7 +1,7 @@
-import { React, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { React } from 'react'
+import { useDispatch } from 'react-redux'
 import { Formik, Form } from 'formik'
-import { createUser, getUsers } from '../app/actions'
+import { createUser } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
 import * as yup from 'yup'
 import { TextField } from '@mui/material'
@@ -10,17 +10,12 @@ import { CustomButton } from './CustomButton'
 export const FormUser = () => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
-  const users = useSelector(state => state.users)
-
   const registerSchema = yup.object().shape({
     firstName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su nombre'),
     lastName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su apellido'),
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
     password: yup.string().min(6, 'Debe tener minimo 6 caracteres').required('Debe ingresar una password'),
-    repeatPass: yup.string().oneOf([yup.ref('password')], 'Your passwords do not match.').required('La password no coincido')
+    repeatPass: yup.string().oneOf([yup.ref('password')], 'Las passwords no coinciden')
   })
 
   return (
@@ -31,14 +26,18 @@ export const FormUser = () => {
                   lastName: '',
                   email: '',
                   password: '',
-                  password2: '',
+                  repeatPass: '',
                   avatar: ''
                 }}
                 validationSchema={registerSchema}
                 onSubmit={(values, { resetForm }) => {
-                  dispatch(createUser(values))
-                  alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
-                  resetForm()
+                  try {
+                    dispatch(createUser(values))
+                    alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
+                    resetForm()
+                  } catch (e) {
+                    alert.error(true, 'Error', e.message)
+                  }
                 }}>
                 {({ touched, errors, values, handleBlur, handleChange }) => (
                     <Form>

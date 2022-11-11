@@ -20,30 +20,23 @@ export function postCategory (payload) {
       const response = await axios.post(`${URL}/categories`, payload)
       return response
     } catch (e) {
-      console.log(e.message)
+      throw new Error('aaaaaaaaaaaaaaaaaaaaa')
     }
   }
 }
 
 export function createUser (payload) {
   return async function () {
-    try {
-      const response = await axios.post(`${URL}/users`, payload)
-      return response
-    } catch (e) {
-      console.log(e.message)
-    }
+    const response = await axios.post(`${URL}/users`, payload)
+    return response
   }
 }
 
 export function logUser (payload) {
   return async function (dispatch) {
-    try {
-      const response = await axios.post(/* Endpoint de logeo, */ payload)
-      return dispatch({ type: LOG_USER, payload: response.data.user })
-    } catch (e) {
-      console.log(e.message)
-    }
+    const response = await axios.post(/* Endpoint de logeo, */ payload)
+    return dispatch({ type: LOG_USER, payload: response.data.user })
+   
   }
 }
 
