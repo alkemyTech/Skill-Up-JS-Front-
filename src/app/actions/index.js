@@ -9,7 +9,7 @@ export function getCategories() {
       const response = await axios.get(`${URL}/categories`)
       return dispatch({ type: GET_CATEGORIES, payload: response.data })
     } catch (e) {
-      console.log(e.message)
+      return e.message
     }
   }
 }
