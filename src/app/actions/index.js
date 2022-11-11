@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_CATEGORIES, LOG_USER, UNLOG_USER, GET_USERS } from './types'
+import { GET_CATEGORIES, LOGIN_USER, LOGOUT_USER, GET_USERS } from './types'
 
 const { URL } = import.meta.env.VITE_URL
 
@@ -20,7 +20,7 @@ export function postCategory (payload) {
       const response = await axios.post(`${URL}/categories`, payload)
       return response
     } catch (e) {
-      throw new Error('aaaaaaaaaaaaaaaaaaaaa')
+
     }
   }
 }
@@ -35,13 +35,12 @@ export function createUser (payload) {
 export function logUser (payload) {
   return async function (dispatch) {
     const response = await axios.post(/* Endpoint de logeo, */ payload)
-    return dispatch({ type: LOG_USER, payload: response.data.user })
-   
+    return dispatch({ type: LOGIN_USER, payload: response.data.user })
   }
 }
 
-export function unlogUser () {
-  return { type: UNLOG_USER }
+export function logout () {
+  return { type: LOGOUT_USER }
 }
 
 export function getUsers () {
