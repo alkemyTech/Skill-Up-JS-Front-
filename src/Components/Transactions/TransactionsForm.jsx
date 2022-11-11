@@ -20,11 +20,13 @@ export default function TransactionForm() {
   const initialValues = {
     description: "",
     amount: "",
-    currency: "",
-    date: "",
+    // currency: "",
+    // date: "",
     userId: user.user.id,
     categoryId: pathName === "/deposit" ? 1 : 2,
+
     //toUserId: "",
+
   };
   const validationSchema = Yup.object({
     description: Yup.string().required(" Required"),
@@ -32,17 +34,20 @@ export default function TransactionForm() {
   });
   const onSubmit = async () => {
     try {
+      console.log(user.user.id);
       const data = await createTransaction({
         description: description.value,
         amount: amount.value,
         currency: amount.value,
-        date: date.value,
+        // date: date.value,
         userId: user.user.id,
         categoryId: pathName === "/deposit" ? 1 : 2,
-        //toUserId: toUserId.value,
+
+        // toUserId: toUserId.value,
+
       }).unwrap();
       console.log(data);
-      navigate("/transactions");
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -75,20 +80,20 @@ export default function TransactionForm() {
               />
             </div>
             <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-              <FormikControl
+              {/* <FormikControl
                 control="input"
                 type="select"
                 placeholder="Currency "
                 name="currency"
-              />
+              /> */}
             </div>
             <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-              <FormikControl
+              {/* <FormikControl
                 control="input"
                 type="date"
                 placeholder="Date "
                 name="date"
-              />
+              /> */}
             </div>
             {pathName === "/send" ? (
               <div className="shadow appearance-none border-b rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
