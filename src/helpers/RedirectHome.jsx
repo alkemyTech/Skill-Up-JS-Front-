@@ -1,16 +1,17 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-const RedirectHome = ({ children }) => {
+const RedirectHome = () => {
   const user = useSelector(state => state.user)
+  console.log(user)
   const token = localStorage.getItem('token')
 
-  if (Object.keys(user).length === 0 && token) {
+  if (Object.keys(user).length === 0 || token) {
     return <Navigate to="/" replace={true} />
   }
 
-  return children
+  return <Outlet/>
 }
 
 export default RedirectHome
