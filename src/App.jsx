@@ -12,6 +12,7 @@ import RequireAuth from "./Components/RequireAuth";
 import Persist from "./Components/Persist";
 import Layout from "./Components/Layout/Layout";
 import { TransactionScreen } from "./Screens/TransactionScreen";
+import TransactionForm from './Components/Transactions/TransactionsForm'
 
 function App() {
   return (
