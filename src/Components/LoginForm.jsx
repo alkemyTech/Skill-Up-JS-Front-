@@ -1,8 +1,8 @@
-import { React, useEffect } from 'react'
+import { React } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
-import { logUser, getUsers } from '../app/actions'
+import { logUser } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
 import { CustomButton } from './CustomButton'
 import { TextField } from '@mui/material'
@@ -10,11 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const LoginForm = () => {
   const navigate = useNavigate()
-
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
 
   const signInSchema = yup.object().shape({
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
@@ -28,11 +24,11 @@ export const LoginForm = () => {
           password: ''
         }}
         validationSchema={signInSchema}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={ (values, { resetForm }) => {
           try {
-            dispatch(logUser(values))
-            navigate('/')
+            dispatch(logUser(values)).then(() => navigate('/'))
           } catch (e) {
+            console.log(e.message)
             alert.error(true, 'Error', e.message)
           }
         }}

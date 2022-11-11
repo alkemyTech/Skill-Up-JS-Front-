@@ -14,7 +14,7 @@ export const FormUser = () => {
     firstName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su nombre'),
     lastName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su apellido'),
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
-    password: yup.string().min(6, 'Debe tener minimo 6 caracteres').required('Debe ingresar una password'),
+    password: yup.string().min(8, 'Debe tener minimo 8 caracteres').required('Debe ingresar una password'),
     repeatPass: yup.string().oneOf([yup.ref('password')], 'Las passwords no coinciden')
   })
 
@@ -32,10 +32,11 @@ export const FormUser = () => {
                 validationSchema={registerSchema}
                 onSubmit={(values, { resetForm }) => {
                   try {
-                    dispatch(createUser(values))
+                    createUser(values)
                     alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
                     resetForm()
                   } catch (e) {
+                    console.log(e.message)
                     alert.error(true, 'Error', e.message)
                   }
                 }}>
