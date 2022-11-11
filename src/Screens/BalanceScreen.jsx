@@ -15,9 +15,8 @@ export const BalanceScreen = () => {
   }
 
   if (isSuccess) {
-    console.log(data);
-    const { income, outcome, balance } = data.body;
-    console.log(income);
+    const { income, outcome } = data.body;
+
     content = (
       <PieChart
         data={[
