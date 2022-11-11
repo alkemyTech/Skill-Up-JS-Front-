@@ -17,11 +17,11 @@ function App () {
       <CssBaseline>
         <Routes>
           <Route element={<Home />}>
-            <Route path='/' element={<Login />} />
+            <Route path='/Login' element={<Login />} />
             <Route path='/register' element={<Register />} />
           </Route>
           <Route element={<Navbar />}>
-            <Route path='/Balance' element={<Balance />} />
+            <Route path='/' element={<Balance />} />
             <Route path='/Movements' element={<Movements />} />
             <Route path='/send' element={<Send />} />
           </Route>
