@@ -6,7 +6,8 @@ import {
   GET_USER,
   GET_USERS,
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  GET_BALANCE
 } from './types'
 
 export const getCategories = () => async (dispatch) => {
@@ -72,6 +73,9 @@ export function createTransaction(payload) {
       console.log(e.message)
     }
   }
+}
+export function getBalance() {
+  return { type: GET_BALANCE }
 }
 
 export const getUser = () => async (dispatch) => {

@@ -7,3 +7,4 @@ export const GET_USER = 'GET_USER'
 
 export const ALL_TRANSACTIONS = 'ALL_TRANSACTIONS'
 export const MY_TRANSACTIONS = 'MY_TRANSACTIONS'
+export const GET_BALANCE = 'GET_BALANCE'
