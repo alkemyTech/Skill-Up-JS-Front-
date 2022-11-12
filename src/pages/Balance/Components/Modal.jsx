@@ -3,11 +3,16 @@ import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 import { CustomButton } from '../../../components/CustomButton'
+import { useDispatch } from 'react-redux'
+import { createTransaction } from '../../../app/actions'
+import { alert } from '../../../services/alert/Alert'
 
 export const Modal = ({ open, setOpen, action }) => {
+  const dispatch = useDispatch()
+
   const operationSchema = yup.object().shape({
     amount: yup.number().min(1, 'No puedes hacer una operacion sin dinero'),
-    category: yup.string().required('Debe ingresar una categoria'),
+    categoryId: yup.number(),
     description: yup.string().required('Debe ingresar una descripcion')
   })
 
@@ -33,13 +38,16 @@ export const Modal = ({ open, setOpen, action }) => {
        <Formik
         initialValues={{
           amount: '',
-          category: action,
+          categoryId: action,
           description: ''
         }}
         validationSchema={operationSchema}
-        onSubmit={ (values, { resetForm }) => {
+        onSubmit={(values, { resetForm }) => {
           try {
-            console.log(values)
+            dispatch(createTransaction(values))
+            alert.confirmation(true, 'Operacion', 'La operacion se hizo correctamente')
+            resetForm()
+            setOpen(false)
           } catch (e) {
             console.log(e.message)
             alert.error(true, 'Error', e.message)
@@ -80,8 +88,8 @@ export const Modal = ({ open, setOpen, action }) => {
             </div>
             <div>
             <Select
-              name='category'
-              value={values.category}
+              name='categoryId'
+              value={values.categoryId}
               label="Seleccione una Categoria"
               onChange={handleChange}
               fullWidth

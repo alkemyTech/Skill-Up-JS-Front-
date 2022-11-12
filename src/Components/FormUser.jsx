@@ -45,7 +45,6 @@ export const FormUser = () => {
                     alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
                     resetForm()
                   } catch (e) {
-                    console.log('waht')
                     alert.error(true, 'Error', e.message)
                   }
                 }}>
