@@ -2,12 +2,12 @@ import axios from 'axios'
 import instance from '../../utils/instance'
 import {
   ALL_TRANSACTIONS,
+  GET_BALANCE,
   GET_CATEGORIES,
   GET_USER,
   GET_USERS,
   LOGIN_USER,
-  LOGOUT_USER,
-  GET_BALANCE
+  LOGOUT_USER
 } from './types'
 
 export const getCategories = () => async (dispatch) => {
@@ -38,15 +38,15 @@ export const createUser = async (values) => {
 }
 
 export const logUser = (values) => async (dispatch) => {
-  const res = await axios.post('http://localhost:3000/users/login', values)
-  
+  const res = await instance.post('/users/login', values)
+
   if (res.status !== 200) {
     console.log(res.message)
     throw new Error(res.message)
   }
   localStorage.setItem('token', res.data.body.token)
   sessionStorage.setItem('role', res.data.body.userData.roleId)
-  
+
   dispatch({ type: LOGIN_USER, payload: res.data.body.userData })
 
   return res
