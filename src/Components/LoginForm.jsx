@@ -24,11 +24,10 @@ export const LoginForm = () => {
           password: ''
         }}
         validationSchema={signInSchema}
-        onSubmit={ (values, { resetForm }) => {
+        onSubmit={ async(values) => {
           try {
-            dispatch(logUser(values)).then(() => navigate('/'))
+            await dispatch(logUser(values)).then(() => navigate('/'))
           } catch (e) {
-            console.log(e.message)
             alert.error(true, 'Error', e.message)
           }
         }}

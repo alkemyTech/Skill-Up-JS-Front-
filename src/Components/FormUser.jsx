@@ -30,13 +30,13 @@ export const FormUser = () => {
                   avatar: ''
                 }}
                 validationSchema={registerSchema}
-                onSubmit={(values, { resetForm }) => {
+                onSubmit={async (values, { resetForm }) => {
                   try {
-                    createUser(values)
+                    await createUser(values)
                     alert.confirmation(true, 'Bienvenido', 'Te has registrado correctamente')
                     resetForm()
                   } catch (e) {
-                    console.log(e.message)
+                    console.log('waht')
                     alert.error(true, 'Error', e.message)
                   }
                 }}>
@@ -118,7 +118,7 @@ export const FormUser = () => {
                           />
                         </div>
                         <CustomButton sx={{ margin: '20px 0 10px 0' }} type="submit">
-                          Log in
+                          Registrarme
                         </CustomButton>
                     </Form>
                 )}

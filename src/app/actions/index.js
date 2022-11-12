@@ -21,14 +21,22 @@ export function postCategory(payload) {
 }
 
 export const createUser = async (values) => {
-  const response = await instance.post('/users', values)
-  console.log(response)
-  return response
+  const res = await instance.post('/users', values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
 }
 
 export const logUser = (values) => async (dispatch) => {
   const res = await instance.post('/users/login', values)
   console.log(res)
+  console.log('aaa')
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
   localStorage.setItem('token', JSON.stringify(res.data.body.token))
   dispatch({ type: LOGIN_USER, payload: res.data.body.userData })
 
