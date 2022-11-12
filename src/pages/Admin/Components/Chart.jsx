@@ -12,7 +12,7 @@ function createData(Fecha, Monto) {
 export default function Chart() {
   const data = useSelector((state) => state.transactions)
 
-  const dataForChart = data?.transactions.map((x) =>
+  const dataForChart = data?.transactions?.map((x) =>
     createData(
       new Date(x.date).toLocaleDateString([], { day: 'numeric', month: 'numeric' }),
       x.amount

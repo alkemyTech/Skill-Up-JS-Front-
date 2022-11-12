@@ -3,7 +3,7 @@ import React from 'react'
 import { ModalUserProfile } from '../../pages/Profile/ModalUserProfile'
 import { CustomNavLink } from './CustomNavLink'
 
-export const SideNav = ({ pages, img }) => {
+export const SideNav = ({ pages, img, logout }) => {
   return (
     <Box className='sidenav' sx={{ backgroundColor: 'surfaces.one' }}>
       <div className='sidenav_pages'>
@@ -17,7 +17,7 @@ export const SideNav = ({ pages, img }) => {
             height: 63
           }}
         />
-        <ModalUserProfile/>
+        <ModalUserProfile />
         <div>
           {pages.map((page) => (
             <CustomNavLink page={page} key={page.route} />
@@ -27,6 +27,7 @@ export const SideNav = ({ pages, img }) => {
       <Button
         className='navlink'
         sx={{ justifyContent: 'flex-start', backgroundColor: 'surfaces.four' }}
+        onClick={logout}
       >
         <Icon sx={{ fontSize: 17 }}>logout</Icon> Salir
       </Button>

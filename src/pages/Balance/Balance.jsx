@@ -70,11 +70,7 @@ export const Balance = () => {
       <Surface>
         Ultimos movimientos
         {exampleData.map((data) => (
-          <MoneyMove
-            variant={data.categoryId}
-            data={data}
-            key={data.description}
-          />
+          <MoneyMove variant={data.categoryId} data={data} key={data.description} />
         ))}
       </Surface>
       <Modal open={open} setOpen={setOpen} action={action} />

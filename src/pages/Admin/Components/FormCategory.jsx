@@ -60,7 +60,7 @@ export const FormCategory = () => {
               <FormLabel>Descripción </FormLabel>
               <TextField
                 error={touched.description && errors.description ? touched.name : false}
-                value={values.name}
+                value={values.description}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 type='text'
