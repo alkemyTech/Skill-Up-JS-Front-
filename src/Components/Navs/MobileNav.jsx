@@ -4,7 +4,7 @@ import { Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { CustomNavLink } from './CustomNavLink'
 
-export const MobileNav = ({ pages, img }) => {
+export const MobileNav = ({ pages, img, logout }) => {
   const [open, setOpen] = useState(false)
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden'
@@ -62,6 +62,7 @@ export const MobileNav = ({ pages, img }) => {
         <Button
           className='navlink'
           sx={{ justifyContent: 'flex-start', backgroundColor: 'surfaces.four' }}
+          onClick={logout}
         >
           <Icon sx={{ fontSize: 17 }}>logout</Icon> Salir
         </Button>

@@ -12,7 +12,7 @@ export const Login = () => {
       </Typography>
       <LoginForm />
       <Typography textAlign={'right'}>
-        ¿No tienes cuenta?
+        ¿No tienes cuenta?{' '}
         <Link to='/register' component={RouterLink} underline='none'>
           ¡Registrate!
         </Link>

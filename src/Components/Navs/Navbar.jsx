@@ -1,7 +1,7 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { MobileNav } from './MobileNav'
 import './Navbar.css'
@@ -10,6 +10,13 @@ import { SideNav } from './SideNav'
 export const Navbar = () => {
   const theme = useTheme()
   const match = useMediaQuery(theme.breakpoints.up('md'))
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.clear()
+    sessionStorage.clear()
+    navigate('/login')
+  }
   const pages =
     JSON.parse(sessionStorage.getItem('role')) !== 1
       ? [
@@ -49,7 +56,8 @@ export const Navbar = () => {
 
   const propPack = {
     pages,
-    img: ''
+    img: '',
+    logout
   }
 
   return (

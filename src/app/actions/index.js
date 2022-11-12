@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { instance } from '../../utils/instance'
+import instance from '../../utils/instance'
 import {
   ALL_TRANSACTIONS,
   GET_CATEGORIES,
@@ -36,8 +36,8 @@ export const createUser = async (values) => {
 export const logUser = (values) => async (dispatch) => {
   const res = await axios.post('http://localhost:3000/users/login', values)
   console.log(res)
-  localStorage.setItem('token', JSON.stringify(res.data.body.token))
-  sessionStorage.setItem('role', JSON.stringify(res.data.body.userData.roleId))
+  localStorage.setItem('token', res.data.body.token)
+  sessionStorage.setItem('role', res.data.body.userData.roleId)
   dispatch({ type: LOGIN_USER, payload: res.data.body.userData })
 
   return res
@@ -56,11 +56,9 @@ export const getUsers = () => async (dispatch) => {
 }
 export const getTransactions = () => async (dispatch) => {
   try {
-    setTimeout(async () => {
-      const res = await instance.get('/transactions')
-      console.log(res)
-      return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
-    }, 2000)
+    const res = await instance.get('/transactions')
+    console.log(res)
+    return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
   } catch (e) {
     return e.message
   }

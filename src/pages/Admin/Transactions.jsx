@@ -11,8 +11,9 @@ import Orders from './Components/Orders'
 
 export const Transactions = () => {
   const dispatch = useDispatch()
-  dispatch(getTransactions())
-  useEffect(() => {}, [dispatch])
+  useEffect(() => {
+    dispatch(getTransactions())
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>
