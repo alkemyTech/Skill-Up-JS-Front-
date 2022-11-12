@@ -2,14 +2,19 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import * as React from 'react'
-import { Categories } from './Components/Categories'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getTransactions } from '../../app/actions'
 import Chart from './Components/Chart'
 import Deposits from './Components/Deposits'
 import Orders from './Components/Orders'
-import { Users } from './Components/Users'
 
-export const AdminPanel = () => {
+export const Transactions = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getTransactions())
+  }, [dispatch])
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Box
@@ -33,7 +38,7 @@ export const AdminPanel = () => {
                 <Chart />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Last order */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper
                 sx={{
@@ -46,22 +51,10 @@ export const AdminPanel = () => {
                 <Deposits />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Total Orders */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <Orders />
-              </Paper>
-            </Grid>
-            {/* Categories */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Categories />
-              </Paper>
-            </Grid>
-            {/* Users */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Users />
               </Paper>
             </Grid>
           </Grid>

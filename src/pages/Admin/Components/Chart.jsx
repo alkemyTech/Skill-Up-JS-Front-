@@ -1,41 +1,30 @@
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
-import {
-  Label,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  XAxis,
-  YAxis
-} from 'recharts'
+import { useSelector } from 'react-redux'
+import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import Title from './Title'
 
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount }
+function createData(Fecha, Monto) {
+  return { Fecha, Monto }
 }
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined)
-]
-
 export default function Chart() {
-  const theme = useTheme()
+  const data = useSelector((state) => state.transactions)
 
+  const dataForChart = data?.transactions.map((x) =>
+    createData(
+      new Date(x.date).toLocaleDateString([], { day: 'numeric', month: 'numeric' }),
+      x.amount
+    )
+  )
+  const theme = useTheme()
   return (
     <React.Fragment>
-      <Title>Ultimo mes</Title>
+      <Title>Fluctuacion</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={dataForChart}
           margin={{
             top: 16,
             right: 16,
@@ -44,14 +33,11 @@ export default function Chart() {
           }}
         >
           <XAxis
-            dataKey='time'
+            dataKey='Fecha'
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           />
-          <YAxis
-            stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
-          >
+          <YAxis stroke={theme.palette.text.secondary} style={theme.typography.body2}>
             <Label
               angle={270}
               position='left'
@@ -64,10 +50,11 @@ export default function Chart() {
               Movimientos ($)
             </Label>
           </YAxis>
+          <Tooltip wrapperStyle={{ outline: 'none' }} />
           <Line
             isAnimationActive={false}
-            type='monotone'
-            dataKey='amount'
+            type='basis'
+            dataKey='Monto'
             stroke={theme.palette.primary.main}
             dot={false}
           />

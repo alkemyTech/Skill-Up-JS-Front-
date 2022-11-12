@@ -1,18 +1,16 @@
 import axios from 'axios'
-import { instance } from '../../../utils/instance'
-import { GET_CATEGORIES, GET_USERS, LOGIN_USER, LOGOUT_USER } from './types'
+import { instance } from '../../utils/instance'
+import { ALL_TRANSACTIONS, GET_CATEGORIES, GET_USERS, LOGIN_USER, LOGOUT_USER } from './types'
 
-export function getCategories() {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(`${URL}/categories`)
-      return dispatch({ type: GET_CATEGORIES, payload: response.data })
-    } catch (e) {
-      return e.message
-    }
+export const getCategories = () => async (dispatch) => {
+  try {
+    const res = await instance.get('/categories')
+    console.log(res)
+    return dispatch({ type: GET_CATEGORIES, payload: res.data.body })
+  } catch (error) {
+    return error.message
   }
 }
-
 export function postCategory(payload) {
   return async function () {
     try {
@@ -40,18 +38,22 @@ export const logUser = (values) => async (dispatch) => {
 export function logout() {
   return { type: LOGOUT_USER }
 }
-
-export function getUsers() {
-  return async function (dispatch) {
-    try {
-      const res = await axios.get(`${URL}/users`)
-      return dispatch({ type: GET_USERS, payload: res.data.users })
-    } catch (e) {
-      console.log(e.message)
-    }
+export const getUsers = () => async (dispatch) => {
+  try {
+    const res = await instance.get('/users')
+    return dispatch({ type: GET_USERS, payload: res.data.body })
+  } catch (e) {
+    return e.message
   }
 }
-
+export const getTransactions = () => async (dispatch) => {
+  try {
+    const res = await instance.get('/transactions')
+    return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
+  } catch (e) {
+    return e.message
+  }
+}
 export function createTransaction(payload) {
   return async function () {
     try {

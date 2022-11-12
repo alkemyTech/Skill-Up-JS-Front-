@@ -3,8 +3,8 @@ import { Box } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getCategories } from '../../../app/actions'
-import { FormCategory } from '../../FormCategory'
+import { getCategories } from '../../app/actions'
+import { FormCategory } from './Components/FormCategory'
 
 export const Categories = () => {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export const Categories = () => {
       <FormCategory />
       <Divider />
       <Typography variant='subtitle2'>Categorías</Typography>
-      {data.payload?.map((x) => (
+      {data?.categories?.map((x) => (
         <Typography variant='caption' key={x.id}>
           {x.name}
         </Typography>

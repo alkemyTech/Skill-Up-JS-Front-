@@ -3,7 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './Components/Navs/Navbar'
 import ProtectRoutes from './helpers/ProtectRoutes'
 import RedirectHome from './helpers/RedirectHome'
-import { AdminPanel } from './pages/Admin/AdminPanel'
+import { Categories } from './pages/Admin/Categories'
+import { Transactions } from './pages/Admin/Transactions'
+import { Users } from './pages/Admin/Users'
 import { Balance } from './pages/Balance/Balance'
 import { Error404 } from './pages/Error404'
 import { Home } from './pages/Home'
@@ -26,7 +28,12 @@ function App() {
           <Route path='/' element={<Balance />} />
           <Route path='/Movements' element={<Movements />} />
           <Route path='/send' element={<Send />} />
-          <Route path='/admin' element={<AdminPanel />} />
+
+          <Route path='/admin'>
+            <Route path='' element={<Transactions />} />
+            <Route path='categories' element={<Categories />} />
+            <Route path='users' element={<Users />} />
+          </Route>
         </Route>
       </Route>
 
