@@ -1,12 +1,12 @@
+import { TextField } from '@mui/material'
+import { Form, Formik } from 'formik'
 import { React } from 'react'
-import { Formik, Form } from 'formik'
-import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import * as yup from 'yup'
 import { logUser } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
 import { CustomButton } from './CustomButton'
-import { TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 
 export const LoginForm = () => {
   const navigate = useNavigate()
@@ -14,7 +14,10 @@ export const LoginForm = () => {
 
   const signInSchema = yup.object().shape({
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
-    password: yup.string().min(6, 'Debe tener minimo 6 caracteres').required('Debe ingresar una password')
+    password: yup
+      .string()
+      .min(6, 'Debe tener minimo 6 caracteres')
+      .required('Debe ingresar una password')
   })
 
   return (

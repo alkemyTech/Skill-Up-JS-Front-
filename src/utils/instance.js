@@ -1,12 +1,25 @@
 import axios from 'axios'
-const getToken = () =>
-  localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
-    : null
+const getToken = () => (localStorage.getItem('token') ? localStorage.getItem('token') : null)
 
-export const getAuthorizationHeader = () => `Bearer ${getToken()}`
+console.log(getToken())
 
-export const instance = axios.create({
+const getAuthorizationHeader = () => `Bearer ${getToken()}`
+
+const instance = axios.create({
   baseURL: import.meta.env.VITE_URL,
-  headers: { Authorization: getAuthorizationHeader() }
+  timeout: 1000
 })
+
+instance.interceptors.request.use(
+  function (config) {
+    if (getToken() !== null) {
+      config.headers.Authorization = getAuthorizationHeader()
+    }
+    return config
+  },
+  function (err) {
+    return Promise.reject(err)
+  }
+)
+
+export default instance

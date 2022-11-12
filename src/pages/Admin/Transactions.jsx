@@ -13,7 +13,7 @@ export const Transactions = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getTransactions())
-  }, [dispatch])
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>

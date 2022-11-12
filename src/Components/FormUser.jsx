@@ -1,20 +1,29 @@
+import { TextField } from '@mui/material'
+import { Form, Formik } from 'formik'
 import { React } from 'react'
 import { useDispatch } from 'react-redux'
-import { Formik, Form } from 'formik'
+import * as yup from 'yup'
 import { createUser } from '../app/actions'
 import { alert } from '../services/alert/Alert.js'
-import * as yup from 'yup'
-import { TextField } from '@mui/material'
 import { CustomButton } from './CustomButton'
 
 export const FormUser = () => {
   const dispatch = useDispatch()
 
   const registerSchema = yup.object().shape({
-    firstName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su nombre'),
-    lastName: yup.string().min(4, 'Debe tener minimo 4 caracteres').required('Debe ingresar su apellido'),
+    firstName: yup
+      .string()
+      .min(4, 'Debe tener minimo 4 caracteres')
+      .required('Debe ingresar su nombre'),
+    lastName: yup
+      .string()
+      .min(4, 'Debe tener minimo 4 caracteres')
+      .required('Debe ingresar su apellido'),
     email: yup.string().email('Email invalido').required('Debe ingresar un email'),
-    password: yup.string().min(8, 'Debe tener minimo 8 caracteres').required('Debe ingresar una password'),
+    password: yup
+      .string()
+      .min(8, 'Debe tener minimo 8 caracteres')
+      .required('Debe ingresar una password'),
     repeatPass: yup.string().oneOf([yup.ref('password')], 'Las passwords no coinciden')
   })
 
@@ -118,7 +127,7 @@ export const FormUser = () => {
                           />
                         </div>
                         <CustomButton sx={{ margin: '20px 0 10px 0' }} type="submit">
-                          Registrarme
+                          Registrate
                         </CustomButton>
                     </Form>
                 )}

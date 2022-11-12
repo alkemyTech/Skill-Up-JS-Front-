@@ -10,9 +10,9 @@ export const Register = () => {
       <Typography variant='h6' textAlign={'center'}>
         Registrate
       </Typography>
-      <FormUser/>
+      <FormUser />
       <Typography textAlign={'right'}>
-        ¿Tienes cuenta?
+        ¿Tienes cuenta?{' '}
         <Link to='/login' component={RouterLink} underline='none'>
           ¡Inicia sesión!
         </Link>
