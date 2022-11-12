@@ -1,6 +1,13 @@
 import axios from 'axios'
 import { instance } from '../../utils/instance'
-import { ALL_TRANSACTIONS, GET_CATEGORIES, GET_USERS, LOGIN_USER, LOGOUT_USER } from './types'
+import {
+  ALL_TRANSACTIONS,
+  GET_CATEGORIES,
+  GET_USER,
+  GET_USERS,
+  LOGIN_USER,
+  LOGOUT_USER
+} from './types'
 
 export const getCategories = () => async (dispatch) => {
   try {
@@ -14,7 +21,7 @@ export const getCategories = () => async (dispatch) => {
 export function postCategory(payload) {
   return async function () {
     try {
-      const response = await axios.post(`${URL}/categories`, payload)
+      const response = await instance.post('/categories', payload)
       return response
     } catch (e) {}
   }
@@ -27,9 +34,10 @@ export const createUser = async (values) => {
 }
 
 export const logUser = (values) => async (dispatch) => {
-  const res = await instance.post('/users/login', values)
+  const res = await axios.post('http://localhost:3000/users/login', values)
   console.log(res)
   localStorage.setItem('token', JSON.stringify(res.data.body.token))
+  sessionStorage.setItem('role', JSON.stringify(res.data.body.userData.roleId))
   dispatch({ type: LOGIN_USER, payload: res.data.body.userData })
 
   return res
@@ -48,8 +56,11 @@ export const getUsers = () => async (dispatch) => {
 }
 export const getTransactions = () => async (dispatch) => {
   try {
-    const res = await instance.get('/transactions')
-    return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
+    setTimeout(async () => {
+      const res = await instance.get('/transactions')
+      console.log(res)
+      return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
+    }, 2000)
   } catch (e) {
     return e.message
   }
@@ -65,10 +76,9 @@ export function createTransaction(payload) {
   }
 }
 
-export const getUser = (userid) => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
   try {
-    const res = await instance.get(`/users/${userid}`)
-
+    const res = await instance.get('/users/user')
     dispatch({ type: GET_USER, payload: res.data.body })
     return res
   } catch (err) {

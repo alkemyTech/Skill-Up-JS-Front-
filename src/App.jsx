@@ -1,8 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './Components/Navs/Navbar'
+import { AdminRedirect } from './helpers/AdminRedirect'
 import ProtectRoutes from './helpers/ProtectRoutes'
 import RedirectHome from './helpers/RedirectHome'
+import { UserRedirect } from './helpers/UserRedirect'
 import { Categories } from './pages/Admin/Categories'
 import { Transactions } from './pages/Admin/Transactions'
 import { Users } from './pages/Admin/Users'
@@ -25,14 +27,17 @@ function App() {
       </Route>
       <Route element={<ProtectRoutes />}>
         <Route element={<Navbar />}>
-          <Route path='/' element={<Balance />} />
-          <Route path='/Movements' element={<Movements />} />
-          <Route path='/send' element={<Send />} />
-
-          <Route path='/admin'>
-            <Route path='' element={<Transactions />} />
-            <Route path='categories' element={<Categories />} />
-            <Route path='users' element={<Users />} />
+          <Route element={<AdminRedirect />}>
+            <Route path='/' element={<Balance />} />
+            <Route path='/Movements' element={<Movements />} />
+            <Route path='/send' element={<Send />} />
+          </Route>
+          <Route element={<UserRedirect />}>
+            <Route path='/admin'>
+              <Route path='' element={<Transactions />} />
+              <Route path='categories' element={<Categories />} />
+              <Route path='users' element={<Users />} />
+            </Route>
           </Route>
         </Route>
       </Route>

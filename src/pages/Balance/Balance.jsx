@@ -1,6 +1,7 @@
 import { Paper, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
+
 import { MoneyMove } from '../../Components/MoneyMove'
 import { Surface } from '../../Components/Surface'
 import { CircleButton } from './Components/CircleButton'
@@ -60,11 +61,7 @@ export const Balance = () => {
       <Surface>
         Ultimos movimientos
         {exampleData.map((data) => (
-          <MoneyMove
-            variant={data.categoryId}
-            data={data}
-            key={data.description}
-          />
+          <MoneyMove variant={data.categoryId} data={data} key={data.description} />
         ))}
       </Surface>
       <Modal open={open} setOpen={setOpen} action={action} />

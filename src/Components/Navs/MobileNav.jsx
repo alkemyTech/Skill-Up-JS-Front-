@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Box, Typography } from '@mui/material'
+import { AppBar, Avatar, Box, Button, Icon, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
@@ -48,18 +48,23 @@ export const MobileNav = ({ pages, img }) => {
       <Box
         className={open ? 'navbar_menu active' : 'navbar_menu'}
         sx={{
-          backgroundColor: theme.palette.background.default
+          backgroundColor: theme.palette.background.default,
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column'
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           {pages.map((page) => (
-            <CustomNavLink
-              page={page}
-              key={page.route}
-              onClick={() => setOpen(false)}
-            />
+            <CustomNavLink page={page} key={page.route} onClick={() => setOpen(false)} />
           ))}
         </Box>
+        <Button
+          className='navlink'
+          sx={{ justifyContent: 'flex-start', backgroundColor: 'surfaces.four' }}
+        >
+          <Icon sx={{ fontSize: 17 }}>logout</Icon> Salir
+        </Button>
       </Box>
     </>
   )

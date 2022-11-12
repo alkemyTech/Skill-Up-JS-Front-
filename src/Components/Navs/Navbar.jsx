@@ -10,23 +10,42 @@ import { SideNav } from './SideNav'
 export const Navbar = () => {
   const theme = useTheme()
   const match = useMediaQuery(theme.breakpoints.up('md'))
-  const pages = [
-    {
-      text: 'Balance',
-      route: '/',
-      icon: 'account_balance'
-    },
-    {
-      text: 'Movimientos',
-      route: 'movements',
-      icon: 'trending_up'
-    },
-    {
-      text: 'Enviar',
-      route: 'send',
-      icon: 'groups'
-    }
-  ]
+  const pages =
+    JSON.parse(sessionStorage.getItem('role')) !== 1
+      ? [
+          {
+            text: 'Balance',
+            route: '/',
+            icon: 'account_balance'
+          },
+          {
+            text: 'Movimientos',
+            route: 'movements',
+            icon: 'trending_up'
+          },
+          {
+            text: 'Enviar',
+            route: 'send',
+            icon: 'groups'
+          }
+        ]
+      : [
+          {
+            text: 'Transacciones',
+            route: 'admin',
+            icon: 'account_balance'
+          },
+          {
+            text: 'Categorias',
+            route: 'admin/categories',
+            icon: 'trending_up'
+          },
+          {
+            text: 'Users',
+            route: 'admin/users',
+            icon: 'groups'
+          }
+        ]
 
   const propPack = {
     pages,
