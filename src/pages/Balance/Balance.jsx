@@ -58,12 +58,12 @@ export const Balance = () => {
           <CircleButton
             icon='attach_money'
             text='Cargar saldo'
-            onClick={() => handleOpen('income')}
+            onClick={() => handleOpen(1)}
           />
           <CircleButton
             icon='payments'
             text='Agregar gasto'
-            onClick={() => handleOpen('outcome')}
+            onClick={() => handleOpen(2)}
           />
         </Box>
       </Box>

@@ -29,16 +29,24 @@ export function postCategory(payload) {
 }
 
 export const createUser = async (values) => {
-  const response = await instance.post('/users', values)
-  console.log(response)
-  return response
+  const res = await instance.post('/users', values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
 }
 
 export const logUser = (values) => async (dispatch) => {
   const res = await axios.post('http://localhost:3000/users/login', values)
-  console.log(res)
+  
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
   localStorage.setItem('token', res.data.body.token)
   sessionStorage.setItem('role', res.data.body.userData.roleId)
+  
   dispatch({ type: LOGIN_USER, payload: res.data.body.userData })
 
   return res

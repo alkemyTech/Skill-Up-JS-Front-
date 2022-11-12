@@ -5,9 +5,10 @@ import * as yup from 'yup'
 import { CustomButton } from '../../../components/CustomButton'
 
 export const Modal = ({ open, setOpen, action }) => {
-  const signInSchema = yup.object().shape({
+  const operationSchema = yup.object().shape({
     amount: yup.number().min(1, 'No puedes hacer una operacion sin dinero'),
-    category: yup.string().required('Debe ingresar una categoria')
+    category: yup.string().required('Debe ingresar una categoria'),
+    description: yup.string().required('Debe ingresar una descripcion')
   })
 
   return (
@@ -27,17 +28,18 @@ export const Modal = ({ open, setOpen, action }) => {
         }}
       >
       <Typography variant='h6' textAlign={'center'}>
-        {action === 'income' ? 'Cargar Saldo' : 'Agregar Gasto'}
+        Agregar Operacion
       </Typography>
        <Formik
         initialValues={{
-          email: '',
-          password: ''
+          amount: '',
+          category: action,
+          description: ''
         }}
-        validationSchema={signInSchema}
+        validationSchema={operationSchema}
         onSubmit={ (values, { resetForm }) => {
           try {
-            console.log('first')
+            console.log(values)
           } catch (e) {
             console.log(e.message)
             alert.error(true, 'Error', e.message)
@@ -63,29 +65,30 @@ export const Modal = ({ open, setOpen, action }) => {
             </div>
             <div>
               <TextField
-                error={touched.password && errors.password}
+                error={touched.description && errors.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name='password'
-                label="Password"
-                helperText={touched.password && errors.password}
+                name='description'
+                label="Descripcion"
+                helperText={touched.description && errors.description}
                 variant="standard"
-                type='password'
-                value={values.password}
+                type='description'
+                value={values.description}
                 fullWidth
                 margin="dense"
               />
             </div>
             <div>
             <Select
-              value={'seleccione'}
+              name='category'
+              value={values.category}
               label="Seleccione una Categoria"
               onChange={handleChange}
               fullWidth
+              margin="dense"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={1}>income</MenuItem>
+              <MenuItem value={2}>expense</MenuItem>
             </Select>
             </div>
             <CustomButton sx={{ margin: '20px 0 10px 0' }} type="submit">
