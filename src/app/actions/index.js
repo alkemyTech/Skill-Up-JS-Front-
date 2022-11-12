@@ -64,3 +64,32 @@ export function createTransaction(payload) {
     }
   }
 }
+
+export const getUser = (userid) => async (dispatch) => {
+  try {
+    const res = await instance.get(`/users/${userid}`)
+
+    dispatch({ type: GET_USER, payload: res.data.body })
+    return res
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+export const updatePassword = async (userid, payload) => {
+  try {
+    const res = await instance.put(`/users/changepassword/${userid}`, payload)
+    return res.data
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+export const deleteUser = async (userid) => {
+  try {
+    const res = await instance.delete(`users/${userid}`)
+    return res.data
+  } catch (err) {
+    console.log(err.message)
+  }
+}
