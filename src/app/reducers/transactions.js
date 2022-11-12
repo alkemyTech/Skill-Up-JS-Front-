@@ -1,4 +1,4 @@
-import { ALL_TRANSACTIONS, MY_TRANSACTIONS, GET_BALANCE } from '../actions/types'
+import { ALL_TRANSACTIONS, MY_TRANSACTIONS, GET_BALANCE, ADD_TRANSACTION } from '../actions/types'
 
 const initialState = {
   transactions: [],
@@ -10,6 +10,10 @@ function transactionReducer (state = initialState, { type, payload }) {
     case ALL_TRANSACTIONS: return {
       ...state,
       transactions: payload
+    }
+    case ADD_TRANSACTION: return {
+      ...state,
+      transactions: [...state.transactions, payload]
     }
     case MY_TRANSACTIONS: return {
       ...state,

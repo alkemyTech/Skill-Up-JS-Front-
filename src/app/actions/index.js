@@ -1,4 +1,3 @@
-import axios from 'axios'
 import instance from '../../utils/instance'
 import {
   ALL_TRANSACTIONS,
@@ -55,6 +54,7 @@ export const logUser = (values) => async (dispatch) => {
 export function logout() {
   return { type: LOGOUT_USER }
 }
+
 export const getUsers = () => async (dispatch) => {
   try {
     const res = await instance.get('/users')
@@ -63,6 +63,7 @@ export const getUsers = () => async (dispatch) => {
     return e.message
   }
 }
+
 export const getTransactions = () => async (dispatch) => {
   try {
     const res = await instance.get('/transactions')
@@ -72,16 +73,18 @@ export const getTransactions = () => async (dispatch) => {
     return e.message
   }
 }
-export function createTransaction(payload) {
-  return async function () {
-    try {
-      const response = await axios.post(`${URL}/transactions`, payload)
-      return response
-    } catch (e) {
-      console.log(e.message)
-    }
+
+export const createTransaction = (values) => async (dispatch) => {
+  const res = await instance.post('/transactions', values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
   }
+
+  return dispatch({ type: ADD_TRANSACTION, payload: res.data.body })
 }
+
 export function getBalance() {
   return { type: GET_BALANCE }
 }
