@@ -1,5 +1,6 @@
 import instance from '../../utils/instance'
 import {
+  ADD_TRANSACTION,
   ALL_TRANSACTIONS,
   GET_BALANCE,
   GET_CATEGORIES,
