@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { instance } from '../../utils/instance'
-import { ALL_TRANSACTIONS, GET_CATEGORIES, GET_USERS, LOGIN_USER, LOGOUT_USER } from './types'
+import { ALL_TRANSACTIONS, GET_CATEGORIES, GET_USERS, GET_USER, LOGIN_USER, LOGOUT_USER, GET_BALANCE } from './types'
 
 export const getCategories = () => async (dispatch) => {
   try {
@@ -63,6 +63,9 @@ export function createTransaction(payload) {
       console.log(e.message)
     }
   }
+}
+export function getBalance() {
+  return { type: GET_BALANCE }
 }
 
 export const getUser = (userid) => async (dispatch) => {
