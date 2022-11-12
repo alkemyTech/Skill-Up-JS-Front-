@@ -1,14 +1,13 @@
-import axios from 'axios'
 import instance from '../../utils/instance'
 import {
+  ADD_TRANSACTION,
   ALL_TRANSACTIONS,
+  GET_BALANCE,
   GET_CATEGORIES,
   GET_USER,
   GET_USERS,
   LOGIN_USER,
-  LOGOUT_USER,
-  GET_BALANCE,
-  ADD_TRANSACTION
+  LOGOUT_USER
 } from './types'
 
 export const getCategories = () => async (dispatch) => {
@@ -39,7 +38,7 @@ export const createUser = async (values) => {
 }
 
 export const logUser = (values) => async (dispatch) => {
-  const res = await axios.post('http://localhost:3000/users/login', values)
+  const res = await instance.post('/users/login', values)
 
   if (res.status !== 200) {
     console.log(res.message)
