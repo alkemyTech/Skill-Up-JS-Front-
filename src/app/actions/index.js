@@ -86,8 +86,8 @@ export const createTransaction = (values) => async (dispatch) => {
   return dispatch({ type: ADD_TRANSACTION, payload: res.data.body })
 }
 
-export function getBalance() {
-  return { type: GET_BALANCE }
+export const getBalance = () => (dispatch) => {
+  return dispatch({ type: GET_BALANCE })
 }
 
 export const getUser = () => async (dispatch) => {

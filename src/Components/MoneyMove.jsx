@@ -31,7 +31,6 @@ export const MoneyMove = ({ variant, data }) => {
       icon = 'paid'
       break
   }
-  console.log(variant)
   return (
     <Box
       sx={{
@@ -63,8 +62,7 @@ export const MoneyMove = ({ variant, data }) => {
       </Box>
       <div>
         <Typography variant='subtitle2' color={baseStyle.color} sx={baseStyle.money}>
-          {variant === 'outcome' && '-'}
-          {data.amount}
+          {variant === 'outcome' && '-'}${data.amount}
         </Typography>
       </div>
     </Box>

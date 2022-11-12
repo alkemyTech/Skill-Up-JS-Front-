@@ -12,7 +12,7 @@ export const Balance = () => {
   const [action, setAction] = useState('')
   const dispatch = useDispatch()
   const transactions = useSelector((state) => state.transactions)
-  const balance = useSelector((state) => state.balance)
+
   useEffect(() => {
     dispatch(getTransactions()).then(() => dispatch(getBalance()))
   }, [dispatch, transactions.length])
@@ -35,7 +35,7 @@ export const Balance = () => {
       >
         <Paper sx={{ padding: '20px', borderRadius: '20px' }} className='card'>
           <Typography color='grey.300'>Balance total</Typography>
-          <Typography variant='h2'>${balance || '0'}</Typography>
+          <Typography variant='h2'>${transactions.balance}</Typography>
         </Paper>
         <Box sx={{ display: 'flex', gap: '20px' }}>
           <CircleButton icon='attach_money' text='Cargar saldo' onClick={() => handleOpen(1)} />
@@ -45,7 +45,7 @@ export const Balance = () => {
       <Surface>
         Ultimos movimientos
         {transactions?.transactions?.map((data) => (
-          <MoneyMove variant={data.categoryId} data={data} key={data.description} />
+          <MoneyMove variant={data.categoryId} data={data} key={data.id} />
         ))}
       </Surface>
       <Modal open={open} setOpen={setOpen} action={action} />
