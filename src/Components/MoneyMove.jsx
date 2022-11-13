@@ -64,7 +64,7 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
         }}>
           <Box sx={{ backgroundColor: '#f1dedb', display: 'flex', alignItems: 'center', padding: '10px' }}>
             <DeleteIcon/>
-            <Typography variant='subtitle2'>Eleminar</Typography>
+            <Typography variant='subtitle2'>Eliminar</Typography>
           </Box>
         </SwipeAction>
       </LeadingActions>
