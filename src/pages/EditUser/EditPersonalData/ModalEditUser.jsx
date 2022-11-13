@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Modal } from '@mui/material'
 import { CustomButton } from '../../../Components/CustomButton'
-import { FormEdit } from './FormEdit'
+import { FormUser } from './FormEdit'
 
 export const ModalEditUser = () => {
   const [open, setOpen] = React.useState(false)
@@ -13,7 +13,7 @@ export const ModalEditUser = () => {
   }
   return (
     <Box>
-        <CustomButton sx={{ ml: 2, mr: 2, width: 200 }} onClick={handleOpenEditUser}>Cambiar contraseña</CustomButton>
+        <CustomButton sx={{ ml: 2, mr: 2, width: 200 }} onClick={handleOpenEditUser}>Editar usuario</CustomButton>
         <Modal
         open={open}
         onClose={handleCloseEditUser}
@@ -21,7 +21,7 @@ export const ModalEditUser = () => {
         aria-describedby="parent-modal-description"
         >
             <Box>
-              <FormEdit handleCloseEditUser={handleCloseEditUser} />
+              <FormUser handleCloseEditUser={handleCloseEditUser} />
             </Box>
         </Modal>
     </Box>
