@@ -1,16 +1,24 @@
-import { Grid, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
-import { Surface } from '../../Components/Surface'
-import { User } from './components/User'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBalance, getTransactions } from '../../app/actions'
+
+import { Users } from '../../Components/Users'
+import { FormSendMoney } from './components/FormSendMoney'
 
 export const Send = () => {
+  const [selectedUser, setSelectedUser] = useState({})
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getTransactions()).then(() => dispatch(getBalance()))
+  }, [dispatch])
+  const balance = useSelector((state) => state.transactions.balance)
+  console.log(balance)
   return (
     <>
-      <Typography
-        color='grey.400'
-        sx={{ display: { xs: 'none', md: 'block' } }}
-      >
+      <Typography color='grey.400' sx={{ display: { xs: 'none', md: 'block' } }}>
         Enviar dinero
       </Typography>
       <Box
@@ -22,16 +30,13 @@ export const Send = () => {
         }}
       >
         <Box className='card' sx={{ padding: '20px', borderRadius: '20px' }}>
-          Formulario de envio
+          {selectedUser.id ? (
+            <FormSendMoney user={selectedUser} />
+          ) : (
+            <Typography>Seleccione un usuario</Typography>
+          )}
         </Box>
-        <Surface>
-          <Typography color='grey.400'>Usuarios</Typography>
-          <Grid container>
-            <Grid item>
-              <User name={'example user'} />
-            </Grid>
-          </Grid>
-        </Surface>
+        <Users onClick={(x) => setSelectedUser(x)} />
       </Box>
     </>
   )

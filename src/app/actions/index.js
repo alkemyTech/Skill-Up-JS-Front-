@@ -7,7 +7,8 @@ import {
   GET_USER,
   GET_USERS,
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  SEND_MONEY
 } from './types'
 
 export const getCategories = () => async (dispatch) => {
@@ -100,7 +101,7 @@ export const getUser = () => async (dispatch) => {
   }
 }
 
-export const updatePassword = (payload) => async() => {
+export const updatePassword = (payload) => async () => {
   try {
     const res = await instance.put('/users/user/changepassword', payload)
     return res.data
@@ -124,5 +125,13 @@ export const deleteUser = () => async () => {
     return res.data
   } catch (err) {
     console.log(err.message)
+  }
+}
+export const sendMoney = (data) => async (dispatch) => {
+  try {
+    const res = await instance.post('/transactions/transfer', data)
+    return dispatch({ type: SEND_MONEY, payload: res.data.body })
+  } catch (error) {
+    return error
   }
 }
