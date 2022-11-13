@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   ADD_TRANSACTION,
   ALL_TRANSACTIONS,

@@ -2,6 +2,7 @@ import instance from '../../utils/instance'
 import {
   ADD_TRANSACTION,
   ALL_TRANSACTIONS,
+  DELETE_TRANSACTION,
   GET_BALANCE,
   GET_CATEGORIES,
   GET_USER,
@@ -85,6 +86,25 @@ export const createTransaction = (values) => async (dispatch) => {
   }
 
   return dispatch({ type: ADD_TRANSACTION, payload: res.data.body })
+}
+
+export const updateTransaction = (values) => async (dispatch) => {
+  const res = await instance.put(`/transactions/${values.id}`, values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
+}
+
+export const deleteTransaction = (id) => async (dispatch) => {
+  const res = await instance.delete(`/transactions/${id}`)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
+  return dispatch({ type: DELETE_TRANSACTION, payload: id })
 }
 
 export const getBalance = () => (dispatch) => {
