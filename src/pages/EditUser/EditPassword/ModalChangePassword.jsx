@@ -12,8 +12,8 @@ export const ModalChangePassword = () => {
     setOpenChangePassword(false)
   }
   return (
-    <Box>
-        <CustomButton sx={{ ml: 2, mr: 2, width: 200 }} onClick={handleOpenChangePassword}>Cambiar contraseña</CustomButton>
+    <Box sx={{ m: 1 }}>
+        <CustomButton sx={{ width: 220 }} onClick={handleOpenChangePassword}>Cambiar contraseña</CustomButton>
         <Modal
         open={openChangePassword}
         onClose={handleCloseChangePassword}
