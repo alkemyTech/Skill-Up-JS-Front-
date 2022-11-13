@@ -15,6 +15,7 @@ import { Login } from './pages/Login'
 import { Movements } from './pages/Movements'
 import { Register } from './pages/Register'
 import { Send } from './pages/Send/Send'
+import { FormUser } from './pages/EditUser/FormEdit'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/' element={<Balance />} />
             <Route path='/Movements' element={<Movements />} />
             <Route path='/send' element={<Send />} />
+            <Route path='/user/edit' element={<FormUser />} />
           </Route>
           <Route element={<UserRedirect />}>
             <Route path='/admin'>
