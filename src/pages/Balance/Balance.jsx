@@ -43,10 +43,15 @@ export const Balance = () => {
         </Box>
       </Box>
       <Surface>
-        Ultimos movimientos
-        {transactions?.transactions?.map((data) => (
-          <MoneyMove variant={data.categoryId} data={data} key={data.id} />
-        ))}
+        {transactions?.transactions.length > 0 ? (
+          <Typography>Ultimos movimientos</Typography>
+        ) : (
+          <Typography>No hay movimientos para mostrar</Typography>
+        )}
+        {transactions?.transactions.length > 0 &&
+          transactions?.transactions
+            ?.slice(0, 10)
+            .map((data) => <MoneyMove variant={data.categoryId} data={data} key={data.id} />)}
       </Surface>
       <Modal open={open} setOpen={setOpen} action={action} />
     </Box>
