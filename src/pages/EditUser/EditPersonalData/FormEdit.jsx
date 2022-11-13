@@ -37,7 +37,6 @@ export const FormUser = ({ handleCloseEditUser }) => {
 
   return (
     <Card sx={{ ...styleCard }}>
-      <CardContent sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
       <Formik
                 initialValues={{
                   firstName: userStoreData.user.firstName,
@@ -58,7 +57,7 @@ export const FormUser = ({ handleCloseEditUser }) => {
                 {({ touched, errors, values, handleBlur, handleChange }) => (
                     <Form>
                       <CardContent>
-                          <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>Editar user</Typography>
+                          <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>Editar usuario</Typography>
                           <TextField
                               sx={{ mb: 2 }}
                               error={touched.firstName && errors.firstName}
@@ -122,7 +121,6 @@ export const FormUser = ({ handleCloseEditUser }) => {
                     </Form>
                 )}
         </Formik>
-      </CardContent>
       </Card>
   )
 }
