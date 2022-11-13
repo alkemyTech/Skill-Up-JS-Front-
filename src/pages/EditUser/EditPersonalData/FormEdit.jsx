@@ -13,12 +13,11 @@ const styleCard = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
-  pt: 2,
-  px: 4,
-  pb: 3,
+  p: 4,
   display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  gap: '20px',
+  borderRadius: '20px'
 }
 
 export const FormUser = ({ handleCloseEditUser }) => {
@@ -57,7 +56,7 @@ export const FormUser = ({ handleCloseEditUser }) => {
                 {({ touched, errors, values, handleBlur, handleChange }) => (
                     <Form>
                       <CardContent>
-                          <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>Editar usuario</Typography>
+                          <Typography variant='h4' sx={{ mb: 5, mt: 1 }}>Editar usuario</Typography>
                           <TextField
                               sx={{ mb: 2 }}
                               error={touched.firstName && errors.firstName}

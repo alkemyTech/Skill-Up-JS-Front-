@@ -12,8 +12,8 @@ export const ModalEditUser = () => {
     setOpen(false)
   }
   return (
-    <Box>
-        <CustomButton sx={{ ml: 2, mr: 2, width: 200 }} onClick={handleOpenEditUser}>Editar usuario</CustomButton>
+    <Box sx={{ m: 1 }}>
+        <CustomButton sx={{ width: 220 }} onClick={handleOpenEditUser}>Editar usuario</CustomButton>
         <Modal
         open={open}
         onClose={handleCloseEditUser}
