@@ -44,7 +44,7 @@ function transactionReducer(state = initialState, { type, payload }) {
     case SEND_MONEY:
       return {
         ...state,
-        transactions: payload
+        balance: state.balance - payload.amount
       }
     default:
       return state

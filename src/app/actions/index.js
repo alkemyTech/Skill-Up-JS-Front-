@@ -127,11 +127,13 @@ export const deleteUser = () => async () => {
     console.log(err.message)
   }
 }
-export const sendMoney = (data) => async (dispatch) => {
-  try {
-    const res = await instance.post('/transactions/transfer', data)
-    return dispatch({ type: SEND_MONEY, payload: res.data.body })
-  } catch (error) {
-    return error
+export const sendMoney = (values) => async (dispatch) => {
+  const res = await instance.post('/transactions/transfer', values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
   }
+
+  return dispatch({ type: SEND_MONEY, payload: values })
 }
