@@ -1,13 +1,13 @@
-import { TextField } from '@mui/material'
+import { TextField, Card } from '@mui/material'
 import { Form, Formik } from 'formik'
 import { React } from 'react'
 import { useSelector } from 'react-redux'
 import * as yup from 'yup'
-import { updateUser } from '../../app/actions'
-import { alert } from '../../services/alert/Alert.js'
-import { CustomButton } from '../../Components/CustomButton'
+import { updateUser } from '../../../app/actions'
+import { alert } from '../../../services/alert/Alert.js'
+import { CustomButton } from '../../../Components/CustomButton'
 
-export const FormUser = () => {
+export const FormUser = ({ handleCloseEditUser }) => {
   const userStoreData = useSelector((state) => state.user)
   const registerSchema = yup.object().shape({
     firstName: yup
@@ -22,8 +22,8 @@ export const FormUser = () => {
   })
 
   return (
-    <div>
-        <Formik
+    <Card sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+      <Formik
                 initialValues={{
                   firstName: userStoreData.user.firstName,
                   lastName: userStoreData.user.lastName,
@@ -105,7 +105,7 @@ export const FormUser = () => {
                         </CustomButton>
                     </Form>
                 )}
-                </Formik>
-    </div>
+        </Formik>
+      </Card>
   )
 }
