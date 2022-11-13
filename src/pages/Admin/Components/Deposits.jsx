@@ -5,8 +5,8 @@ import Title from './Title'
 
 export default function Deposits() {
   const data = useSelector((state) => state.transactions)
-  const amount = data.transactions[1]?.amount
-  const date = new Date(data.transactions[1]?.date)
+  const amount = data.transactions[0]?.amount
+  const date = new Date(data.transactions[0]?.date)
 
   return (
     <React.Fragment>
