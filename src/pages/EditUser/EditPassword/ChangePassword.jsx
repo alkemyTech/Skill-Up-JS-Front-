@@ -18,7 +18,9 @@ const styleCard = {
   pb: 3,
   display: 'flex',
   justifyContent: 'center',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  gap: '20px',
+  borderRadius: '20px'
 }
 
 const validationSchema = yup.object({
@@ -75,7 +77,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="currentPassword"
           name="currentPassword"
-          label="Current password"
+          label="Contraseña actual"
           type="password"
           value={formik.values.currentPassword}
           onChange={formik.handleChange}
@@ -87,7 +89,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="newPassword"
           name="newPassword"
-          label="New password"
+          label="Nueva contraseña"
           type="password"
           value={formik.values.newPassword}
           onChange={formik.handleChange}
@@ -99,7 +101,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="passwordConfirmation"
           name="passwordConfirmation"
-          label="Confirm your password"
+          label="Confirma tu contraseña"
           type="password"
           value={formik.values.passwordConfirmation}
           onChange={formik.handleChange}
@@ -107,7 +109,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
         />
       </CardContent>
-      <CardActions sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
+      <CardActions sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
         <CustomButton onClick={formik.handleSubmit} sx={{ ml: 2, mr: 2, width: 200 }}>Cambiar</CustomButton>
       </CardActions>
     </Card>

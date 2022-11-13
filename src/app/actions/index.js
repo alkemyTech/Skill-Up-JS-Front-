@@ -110,9 +110,9 @@ export const updatePassword = (payload) => async () => {
   }
 }
 
-export const updateUser = async (userid, payload) => {
+export const updateUser = async (payload) => {
   try {
-    const res = await instance.put('/users/user', payload)
+    const res = await instance.put('/users', payload)
     return res.data
   } catch (err) {
     console.log(err.message)
