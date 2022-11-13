@@ -69,7 +69,7 @@ export const getTransactions = () => async (dispatch) => {
   try {
     const res = await instance.get('/transactions')
     console.log(res)
-    return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body })
+    return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body.reverse() })
   } catch (e) {
     return e.message
   }
