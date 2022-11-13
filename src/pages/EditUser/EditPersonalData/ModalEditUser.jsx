@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Modal } from '@mui/material'
 import { CustomButton } from '../../../Components/CustomButton'
-import { FormUser } from './FormEdit'
+import { FormEdit } from './FormEdit'
 
 export const ModalEditUser = () => {
   const [open, setOpen] = React.useState(false)
@@ -21,7 +21,7 @@ export const ModalEditUser = () => {
         aria-describedby="parent-modal-description"
         >
             <Box>
-              <FormUser handleCloseEditUser={handleCloseEditUser} />
+              <FormEdit handleCloseEditUser={handleCloseEditUser} />
             </Box>
         </Modal>
     </Box>

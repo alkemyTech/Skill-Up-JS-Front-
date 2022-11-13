@@ -20,7 +20,7 @@ const styleCard = {
   borderRadius: '20px'
 }
 
-export const FormUser = ({ handleCloseEditUser }) => {
+export const FormEdit = ({ handleCloseEditUser }) => {
   const userStoreData = useSelector((state) => state.user)
   const registerSchema = yup.object().shape({
     firstName: yup
@@ -41,7 +41,8 @@ export const FormUser = ({ handleCloseEditUser }) => {
                   firstName: userStoreData.user.firstName,
                   lastName: userStoreData.user.lastName,
                   email: userStoreData.user.email,
-                  avatar: userStoreData.user.avatar
+                  avatar: userStoreData.user.avatar,
+                  roleId: 2
                 }}
                 validationSchema={registerSchema}
                 onSubmit={async (values, { resetForm }) => {
