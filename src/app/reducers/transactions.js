@@ -1,5 +1,11 @@
 /* eslint-disable no-case-declarations */
-import { ADD_TRANSACTION, ALL_TRANSACTIONS, GET_BALANCE, MY_TRANSACTIONS, DELETE_TRANSACTION } from '../actions/types'
+import {
+  ADD_TRANSACTION,
+  ALL_TRANSACTIONS,
+  GET_BALANCE,
+  MY_TRANSACTIONS,
+  SEND_MONEY
+} from '../actions/types'
 
 const initialState = {
   transactions: [],
@@ -36,7 +42,11 @@ function transactionReducer(state = initialState, { type, payload }) {
         ...state,
         balance: bal
       }
-
+    case SEND_MONEY:
+      return {
+        ...state,
+        balance: state.balance - payload.amount
+      }
     default:
       return state
   }

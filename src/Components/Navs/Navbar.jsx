@@ -40,12 +40,12 @@ export const Navbar = () => {
           {
             text: 'Transacciones',
             route: 'admin',
-            icon: 'account_balance'
+            icon: 'insights'
           },
           {
             text: 'Categorias',
             route: 'admin/categories',
-            icon: 'trending_up'
+            icon: 'category'
           },
           {
             text: 'Users',

@@ -2,13 +2,14 @@ import instance from '../../utils/instance'
 import {
   ADD_TRANSACTION,
   ALL_TRANSACTIONS,
+  DELETE_TRANSACTION,
   GET_BALANCE,
   GET_CATEGORIES,
   GET_USER,
   GET_USERS,
   LOGIN_USER,
   LOGOUT_USER,
-  DELETE_TRANSACTION
+  SEND_MONEY
 } from './types'
 
 export const getCategories = () => async (dispatch) => {
@@ -120,7 +121,7 @@ export const getUser = () => async (dispatch) => {
   }
 }
 
-export const updatePassword = (payload) => async() => {
+export const updatePassword = (payload) => async () => {
   try {
     const res = await instance.put('/users/user/changepassword', payload)
     return res.data
@@ -145,4 +146,14 @@ export const deleteUser = () => async () => {
   } catch (err) {
     console.log(err.message)
   }
+}
+export const sendMoney = (values) => async (dispatch) => {
+  const res = await instance.post('/transactions/transfer', values)
+  console.log(res)
+  if (res.status !== 200) {
+    console.log(res.message)
+    throw new Error(res.message)
+  }
+
+  return dispatch({ type: SEND_MONEY, payload: values })
 }
