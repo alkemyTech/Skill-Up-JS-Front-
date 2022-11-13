@@ -7,8 +7,10 @@ import { MoneyMove } from '../../Components/MoneyMove'
 import { Surface } from '../../Components/Surface'
 import { CircleButton } from './Components/CircleButton'
 import { Modal } from './Components/Modal'
+
 export const Balance = () => {
   const [open, setOpen] = useState(false)
+  const [currentTransaction, setCurrentTransaction] = useState([{}])
   const [action, setAction] = useState('')
   const dispatch = useDispatch()
   const transactions = useSelector((state) => state.transactions)
@@ -53,9 +55,9 @@ export const Balance = () => {
         {transactions?.transactions.length > 0 &&
           transactions?.transactions
             ?.slice(0, 10)
-            .map((data) => <MoneyMove variant={data.categoryId} data={data} key={data.id} />)}
+            .map((data) => <MoneyMove setCurrentTransaction={setCurrentTransaction} handleOpen={handleOpen} variant={data.categoryId} data={data} key={data.id} />)}
       </Surface>
-      <Modal open={open} setOpen={setOpen} action={action} />
+      <Modal currentTransaction={currentTransaction} setCurrentTransaction={setCurrentTransaction} open={open} setOpen={setOpen} action={action} />
     </Box>
   )
 }
