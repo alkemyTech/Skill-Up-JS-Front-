@@ -43,11 +43,13 @@ export const Balance = () => {
         </Box>
       </Box>
       <Surface>
-        {transactions?.transactions.length > 0 ? (
+        {transactions?.transactions.length > 0
+          ? (
           <Typography>Ultimos movimientos</Typography>
-        ) : (
+            )
+          : (
           <Typography>No hay movimientos para mostrar</Typography>
-        )}
+            )}
         {transactions?.transactions.length > 0 &&
           transactions?.transactions
             ?.slice(0, 10)
