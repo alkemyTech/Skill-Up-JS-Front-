@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card, CardActions, CardContent, Typography, Avatar, Box } from '@mui/material'
 import { CustomButton } from '../../Components/CustomButton'
-import { ModalChangePassword } from '../EditUser/ModalChangePassword'
+import { ModalChangePassword } from '../EditUser/EditPassword/ModalChangePassword'
 import { useSelector, useDispatch } from 'react-redux'
 import { Loader } from '../../Components/Loader'
 import { alert } from '../../services/alert/Alert'
 import { deleteUser } from '../../app/actions/index'
 import { useNavigate } from 'react-router-dom'
+import { ModalEditUser } from '../EditUser/EditPersonalData/ModalEditUser'
 
 const styleCard = {
   position: 'absolute',
@@ -64,8 +65,8 @@ export const UserProfile = () => {
         ))}
       </CardContent>
       <CardActions sx={{ mt: 8, ml: 5, mr: 5 }}>
-        <CustomButton sx={{ mr: 2, ml: 2, width: 200 }}>Editar usuario</CustomButton>
-        <ModalChangePassword userId={userStoreData.user.id}/>
+        <ModalEditUser />
+        <ModalChangePassword/>
         <CustomButton sx={{ ml: 2, mr: 2, width: 200 }} onClick={handleDeleteUser}>Borrar usuario</CustomButton>
       </CardActions>
     </Card>

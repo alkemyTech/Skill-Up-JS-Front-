@@ -1,13 +1,27 @@
-import { TextField } from '@mui/material'
+import { TextField, Card, CardContent, CardActions, Typography } from '@mui/material'
 import { Form, Formik } from 'formik'
 import { React } from 'react'
 import { useSelector } from 'react-redux'
 import * as yup from 'yup'
-import { updateUser } from '../../app/actions'
-import { alert } from '../../services/alert/Alert.js'
-import { CustomButton } from '../../Components/CustomButton'
+import { updateUser } from '../../../app/actions'
+import { alert } from '../../../services/alert/Alert.js'
+import { CustomButton } from '../../../Components/CustomButton'
 
-export const FormUser = () => {
+const styleCard = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  pt: 2,
+  px: 4,
+  pb: 3,
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column'
+}
+
+export const FormUser = ({ handleCloseEditUser }) => {
   const userStoreData = useSelector((state) => state.user)
   const registerSchema = yup.object().shape({
     firstName: yup
@@ -22,8 +36,8 @@ export const FormUser = () => {
   })
 
   return (
-    <div>
-        <Formik
+    <Card sx={{ ...styleCard }}>
+      <Formik
                 initialValues={{
                   firstName: userStoreData.user.firstName,
                   lastName: userStoreData.user.lastName,
@@ -42,23 +56,24 @@ export const FormUser = () => {
                 }}>
                 {({ touched, errors, values, handleBlur, handleChange }) => (
                     <Form>
-                        <div>
-                        <TextField
-                          error={touched.firstName && errors.firstName}
-                          value={values.firstName}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          label="Nombre"
-                          helperText={touched.firstName && errors.firstName}
-                          variant="standard"
-                          type='text'
-                          name='firstName'
-                          fullWidth
-                          margin="dense"
-                        />
-                        </div>
-                        <div>
+                      <CardContent>
+                          <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>Editar usuario</Typography>
                           <TextField
+                              sx={{ mb: 2 }}
+                              error={touched.firstName && errors.firstName}
+                              value={values.firstName}
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              label="Nombre"
+                              helperText={touched.firstName && errors.firstName}
+                              variant="standard"
+                              type='text'
+                              name='firstName'
+                              fullWidth
+                              margin="dense"
+                          />
+                          <TextField
+                            sx={{ mb: 2 }}
                             error={touched.lastName && errors.lastName}
                             value={values.lastName}
                             onBlur={handleBlur}
@@ -71,9 +86,8 @@ export const FormUser = () => {
                             fullWidth
                             margin="dense"
                           />
-                        </div>
-                        <div>
                           <TextField
+                            sx={{ mb: 2 }}
                             error={touched.email && errors.email}
                             value={values.email}
                             onBlur={handleBlur}
@@ -86,26 +100,27 @@ export const FormUser = () => {
                             fullWidth
                             margin="dense"
                           />
-                        </div>
-                        <div>
-                        <TextField
-                          value={values.avatar}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          label="Avatar"
-                          variant="standard"
-                          type='text'
-                          name='Avatar'
-                          fullWidth
-                          margin="dense"
-                        />
-                        </div>
-                        <CustomButton sx={{ margin: '20px 0 10px 0' }} type="submit">
-                          Actualizar datos
+                          <TextField
+                            sx={{ mb: 2 }}
+                            value={values.avatar}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            label="Avatar"
+                            variant="standard"
+                            type='text'
+                            name='Avatar'
+                            fullWidth
+                            margin="dense"
+                          />
+                      </CardContent>
+                      <CardActions sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
+                        <CustomButton sx={{ ml: 2, mr: 2, mt: 2, width: 200 }} type="submit">
+                            Actualizar datos
                         </CustomButton>
+                      </CardActions>
                     </Form>
                 )}
-                </Formik>
-    </div>
+        </Formik>
+      </Card>
   )
 }

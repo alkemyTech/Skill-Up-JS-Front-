@@ -3,9 +3,9 @@ import { Card, CardActions, CardContent, Typography, TextField } from '@mui/mate
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
-import { alert } from '../../services/alert/Alert'
-import { updatePassword } from '../../app/actions'
-import { CustomButton } from '../../Components/CustomButton'
+import { alert } from '../../../services/alert/Alert'
+import { updatePassword } from '../../../app/actions'
+import { CustomButton } from '../../../Components/CustomButton'
 
 const styleCard = {
   position: 'absolute',
