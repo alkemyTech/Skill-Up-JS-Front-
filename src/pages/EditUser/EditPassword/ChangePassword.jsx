@@ -75,7 +75,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="currentPassword"
           name="currentPassword"
-          label="Current password"
+          label="Contraseña actual"
           type="password"
           value={formik.values.currentPassword}
           onChange={formik.handleChange}
@@ -87,7 +87,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="newPassword"
           name="newPassword"
-          label="New password"
+          label="Nueva contraseña"
           type="password"
           value={formik.values.newPassword}
           onChange={formik.handleChange}
@@ -99,7 +99,7 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
           sx={{ mb: 2 }}
           id="passwordConfirmation"
           name="passwordConfirmation"
-          label="Confirm your password"
+          label="Confirma tu contraseña"
           type="password"
           value={formik.values.passwordConfirmation}
           onChange={formik.handleChange}

@@ -56,7 +56,7 @@ export const UserProfile = () => {
   return (
     <Card sx={{ ...styleCard }}>
       <CardContent sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-        <Typography variant='h4' sx={{ mb: 8 }}>User profile</Typography>
+        <Typography variant='h4' sx={{ mb: 8 }}>Perfil de usuario</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Avatar src={userStoreData.user.avatar} sx={{ width: 150, height: 150, mb: 5 }}/>
         </Box>
