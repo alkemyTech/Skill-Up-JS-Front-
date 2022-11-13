@@ -109,6 +109,15 @@ export const updatePassword = (payload) => async() => {
   }
 }
 
+export const updateUser = async (userid, payload) => {
+  try {
+    const res = await instance.put('/users/user', payload)
+    return res.data
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
 export const deleteUser = () => async () => {
   try {
     const res = await instance.delete('/users/user')
