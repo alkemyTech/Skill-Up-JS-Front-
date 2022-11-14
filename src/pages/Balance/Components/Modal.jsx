@@ -1,18 +1,18 @@
-import { Box, Modal as MuiModal, TextField, Typography, Select, MenuItem } from '@mui/material'
+import { Box, MenuItem, Modal as MuiModal, Select, TextField, Typography } from '@mui/material'
+import { Form, Formik } from 'formik'
 import React from 'react'
-import { Formik, Form } from 'formik'
-import * as yup from 'yup'
-import { CustomButton } from '../../../components/CustomButton'
 import { useDispatch } from 'react-redux'
+import * as yup from 'yup'
 import {
   createTransaction,
+  getBalance,
   getTransactions,
-  updateTransaction,
-  getBalance
+  updateTransaction
 } from '../../../app/actions'
+import { CustomButton } from '../../../components/CustomButton'
 import { alert } from '../../../services/alert/Alert'
 
-export const Modal = ({ open, setOpen, action, currentTransaction, setCurrentTransaction }) => {
+export const Modal = ({ open, setOpen, currentTransaction, setCurrentTransaction }) => {
   const dispatch = useDispatch()
 
   const operationSchema = yup.object().shape({
@@ -50,13 +50,12 @@ export const Modal = ({ open, setOpen, action, currentTransaction, setCurrentTra
           initialValues={{
             id: currentTransaction?.id ?? '',
             amount: currentTransaction?.amount ?? '',
-            categoryId: currentTransaction?.categoryId ?? action,
+            categoryId: currentTransaction?.categoryId ?? 1,
             description: currentTransaction?.description ?? ''
           }}
           validationSchema={operationSchema}
           onSubmit={async (values, { resetForm }) => {
             try {
-              console.log(values.id, 'aaaaa')
               if (Object.keys(currentTransaction).length === 0) {
                 await dispatch(createTransaction(values))
                 alert.confirmation(true, 'Operacion', 'La operacion se hizo correctamente')

@@ -10,22 +10,20 @@ import { Modal } from './Components/Modal'
 
 export const Balance = () => {
   const [open, setOpen] = useState(false)
-  const [currentTransaction, setCurrentTransaction] = useState([{}])
-  const [action, setAction] = useState('')
+  const [currentTransaction, setCurrentTransaction] = useState({})
   const dispatch = useDispatch()
   const transactions = useSelector((state) => state.transactions)
 
   useEffect(() => {
     dispatch(getTransactions()).then(() => dispatch(getBalance()))
-  }, [dispatch, transactions.length])
+  }, [dispatch, transactions.transactions.length])
 
-  const handleOpen = (action) => {
-    setAction(action)
+  const handleOpen = () => {
     setOpen(true)
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
       <Box
         sx={{
           display: 'flex',
@@ -35,13 +33,20 @@ export const Balance = () => {
           alignItems: 'center'
         }}
       >
-        <Paper sx={{ padding: '20px', borderRadius: '20px' }} className='card'>
-          <Typography color='grey.300'>Balance total</Typography>
-          <Typography variant='h2'>${transactions.balance}</Typography>
-        </Paper>
-        <Box sx={{ display: 'flex', gap: '20px' }}>
-          <CircleButton icon='attach_money' text='Cargar saldo' onClick={() => handleOpen(1)} />
-          <CircleButton icon='payments' text='Agregar gasto' onClick={() => handleOpen(2)} />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            width: '100%',
+            alignItems: 'center'
+          }}
+        >
+          <Paper sx={{ padding: '20px', borderRadius: '20px' }} className='card'>
+            <Typography color='grey.300'>Balance total</Typography>
+            <Typography variant='h2'>${transactions.balance}</Typography>
+          </Paper>
+
+          <CircleButton icon='payments' text='Nuevo movimiento' onClick={() => handleOpen()} />
         </Box>
       </Box>
       <Surface>
@@ -68,7 +73,6 @@ export const Balance = () => {
         setCurrentTransaction={setCurrentTransaction}
         open={open}
         setOpen={setOpen}
-        action={action}
       />
     </Box>
   )
