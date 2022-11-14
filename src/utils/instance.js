@@ -1,8 +1,6 @@
 import axios from 'axios'
 const getToken = () => (localStorage.getItem('token') ? localStorage.getItem('token') : null)
 
-console.log(getToken())
-
 const getAuthorizationHeader = () => `Bearer ${getToken()}`
 
 const instance = axios.create({

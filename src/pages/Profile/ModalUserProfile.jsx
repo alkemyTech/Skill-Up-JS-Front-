@@ -1,7 +1,7 @@
-import React from 'react'
-import { Box, Modal, Button } from '@mui/material'
-import { UserProfile } from './UserProfile'
+import { Box, Button, Modal } from '@mui/material'
 import Icon from '@mui/material/Icon'
+import React from 'react'
+import { UserProfile } from './UserProfile'
 
 export const ModalUserProfile = () => {
   const [open, setOpen] = React.useState(false)
@@ -14,17 +14,23 @@ export const ModalUserProfile = () => {
 
   return (
     <Box>
-        <Button onClick={handleOpenUserProfile}><Icon>person</Icon> User profile</Button>
-        <Modal
+      <Button
+        onClick={handleOpenUserProfile}
+        className='navlink'
+        sx={{ justifyContent: 'flex-start' }}
+      >
+        <Icon>person</Icon> Perfil de usuario
+      </Button>
+      <Modal
         open={open}
         onClose={handleCloseUserProfile}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-        >
-          <Box>
-            <UserProfile/>
-          </Box>
-        </Modal>
+        aria-labelledby='parent-modal-title'
+        aria-describedby='parent-modal-description'
+      >
+        <Box>
+          <UserProfile />
+        </Box>
+      </Modal>
     </Box>
   )
 }

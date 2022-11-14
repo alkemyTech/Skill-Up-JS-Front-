@@ -1,8 +1,9 @@
-import { Box, Icon, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { Box, Icon, Typography } from '@mui/material'
 import React from 'react'
 
+import { useDispatch } from 'react-redux'
 import {
   LeadingActions,
   SwipeableList,
@@ -11,9 +12,8 @@ import {
   TrailingActions
 } from 'react-swipeable-list'
 import 'react-swipeable-list/dist/styles.css'
-import { alert } from '../services/alert/Alert'
-import { useDispatch } from 'react-redux'
 import { deleteTransaction, getBalance, getTransactions } from '../app/actions'
+import { alert } from '../services/alert/Alert'
 
 export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) => {
   let icon = ''
@@ -47,10 +47,11 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
   }
 
   const dispatch = useDispatch()
-
+  const isAdmin = sessionStorage.getItem('role') === 1
   const leadingActions = () => {
     return (
       <LeadingActions>
+
         <SwipeAction onClick={ async() => {
           try {
             await dispatch(deleteTransaction(data.id))
@@ -65,6 +66,7 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
           <Box sx={{ backgroundColor: '#f1dedb', display: 'flex', alignItems: 'center', padding: '10px' }}>
             <DeleteIcon/>
             <Typography variant='subtitle2'>Eliminar</Typography>
+
           </Box>
         </SwipeAction>
       </LeadingActions>
@@ -74,17 +76,26 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
   const trailingActions = () => {
     return (
       <TrailingActions>
-        <SwipeAction onClick={() => {
-          console.log(data)
-          setCurrentTransaction(data)
-          handleOpen()
-        }}>
-        <Box sx={{ backgroundColor: '#d3d3ee', display: 'flex', alignItems: 'center', padding: '10px' }}>
-          <ChangeCircleIcon/>
-          <Typography variant='subtitle2'>Editar</Typography>
-        </Box>
+        <SwipeAction
+          onClick={() => {
+            console.log(data)
+            setCurrentTransaction(data)
+            handleOpen()
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: '#d3d3ee',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px'
+            }}
+          >
+            <ChangeCircleIcon />
+            <Typography variant='subtitle2'>Editar</Typography>
+          </Box>
         </SwipeAction>
-      </TrailingActions >
+      </TrailingActions>
     )
   }
 
@@ -98,38 +109,35 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
         cursor: 'grab'
       }}
     >
-    <SwipeableList>
-      <SwipeableListItem
-        leadingActions={leadingActions()}
-        trailingActions={trailingActions()}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px', width: '100%' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '50%',
-            backgroundColor: baseStyle.bgColor,
-            color: baseStyle.color,
-            width: '57px',
-            height: '57px'
-          }}
-        >
-          <Icon>{icon}</Icon>
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant='subtitle2'>{data.description}</Typography>
-          <Typography color='grey.400'>{data.date.slice(0, 10)}</Typography>
-        </Box>
-      </Box>
-      <div>
-        <Typography variant='subtitle2' color={baseStyle.color} sx={baseStyle.money}>
-          {variant === 2 && '-'}${data.amount}
-        </Typography>
-      </div>
-      </SwipeableListItem>
-    </SwipeableList>
+      <SwipeableList>
+        <SwipeableListItem leadingActions={leadingActions()} trailingActions={trailingActions()}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px', width: '100%' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '50%',
+                backgroundColor: baseStyle.bgColor,
+                color: baseStyle.color,
+                width: '57px',
+                height: '57px'
+              }}
+            >
+              <Icon>{icon}</Icon>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography variant='subtitle2'>{data.description}</Typography>
+              <Typography color='grey.400'>{data.date.slice(0, 10)}</Typography>
+            </Box>
+          </Box>
+          <div>
+            <Typography variant='subtitle2' color={baseStyle.color} sx={baseStyle.money}>
+              {variant === 2 && '-'}${data.amount}
+            </Typography>
+          </div>
+        </SwipeableListItem>
+      </SwipeableList>
     </Box>
   )
 }

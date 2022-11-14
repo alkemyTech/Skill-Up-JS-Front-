@@ -17,11 +17,11 @@ export const Movements = () => {
       <Typography color='grey.400' sx={{ display: { xs: 'none', md: 'block' } }}>
         Movimientos
       </Typography>
-      {transactions.transactions.length > 0
-        ? (<Pagination data={transactions.transactions} />)
-        : (
+      {transactions.transactions.length > 0 ? (
+        <Pagination data={transactions.transactions} />
+      ) : (
         <Typography variant='h6'> No hay movimientos para mostrar</Typography>
-          )}
+      )}
     </>
   )
 }
