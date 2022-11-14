@@ -1,11 +1,11 @@
-import { TextField, Card, CardContent, CardActions, Typography } from '@mui/material'
+import { Card, CardActions, CardContent, TextField, Typography } from '@mui/material'
 import { Form, Formik } from 'formik'
 import { React } from 'react'
 import { useSelector } from 'react-redux'
 import * as yup from 'yup'
 import { updateUser } from '../../../app/actions'
-import { alert } from '../../../services/alert/Alert.js'
 import { CustomButton } from '../../../Components/CustomButton'
+import { alert } from '../../../services/alert/Alert.js'
 
 const styleCard = {
   position: 'absolute',
@@ -41,14 +41,14 @@ export const FormEdit = ({ handleCloseEditUser }) => {
           firstName: userStoreData.user.firstName,
           lastName: userStoreData.user.lastName,
           email: userStoreData.user.email,
-          avatar: userStoreData.user.avatar,
-          roleId: 2
+          roleId: userStoreData.user.roleId
         }}
         validationSchema={registerSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
             await updateUser(values)
             alert.confirmation(true, 'Actualizado con éxito', 'Has actualizado tu perfil')
+            handleCloseEditUser()
             resetForm()
           } catch (e) {
             alert.error(true, 'Error', e.message)
@@ -100,18 +100,6 @@ export const FormEdit = ({ handleCloseEditUser }) => {
                 variant='standard'
                 type='email'
                 name='email'
-                fullWidth
-                margin='dense'
-              />
-              <TextField
-                sx={{ mb: 2 }}
-                value={values.avatar}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                label='Avatar'
-                variant='standard'
-                type='text'
-                name='Avatar'
                 fullWidth
                 margin='dense'
               />

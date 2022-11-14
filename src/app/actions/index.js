@@ -15,7 +15,6 @@ import {
 export const getCategories = () => async (dispatch) => {
   try {
     const res = await instance.get('/categories')
-    console.log(res)
     return dispatch({ type: GET_CATEGORIES, payload: res.data.body })
   } catch (error) {
     return error.message
@@ -32,9 +31,7 @@ export function postCategory(payload) {
 
 export const createUser = async (values) => {
   const res = await instance.post('/users', values)
-  console.log(res)
   if (res.status !== 200) {
-    console.log(res.message)
     throw new Error(res.message)
   }
 }
@@ -43,7 +40,6 @@ export const logUser = (values) => async (dispatch) => {
   const res = await instance.post('/users/login', values)
 
   if (res.status !== 200) {
-    console.log(res.message)
     throw new Error(res.message)
   }
   localStorage.setItem('token', res.data.body.token)
@@ -70,7 +66,6 @@ export const getUsers = () => async (dispatch) => {
 export const getTransactions = () => async (dispatch) => {
   try {
     const res = await instance.get('/transactions')
-    console.log(res)
     return dispatch({ type: ALL_TRANSACTIONS, payload: res.data.body.reverse() })
   } catch (e) {
     return e.message
@@ -79,7 +74,6 @@ export const getTransactions = () => async (dispatch) => {
 
 export const createTransaction = (values) => async (dispatch) => {
   const res = await instance.post('/transactions', values)
-  console.log(res)
   if (res.status !== 200) {
     console.log(res.message)
     throw new Error(res.message)
@@ -90,7 +84,6 @@ export const createTransaction = (values) => async (dispatch) => {
 
 export const updateTransaction = (values) => async (dispatch) => {
   const res = await instance.put(`/transactions/${values.id}`, values)
-  console.log(res)
   if (res.status !== 200) {
     console.log(res.message)
     throw new Error(res.message)
@@ -99,7 +92,6 @@ export const updateTransaction = (values) => async (dispatch) => {
 
 export const deleteTransaction = (id) => async (dispatch) => {
   const res = await instance.delete(`/transactions/${id}`)
-  console.log(res)
   if (res.status !== 200) {
     console.log(res.message)
     throw new Error(res.message)

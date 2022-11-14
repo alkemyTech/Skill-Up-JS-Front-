@@ -2,6 +2,7 @@ import { Avatar, Grid, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../app/actions'
+import { stringToColor } from '../helpers/ColorGenerator'
 import Title from '../pages/Admin/Components/Title'
 import { Surface } from './Surface'
 
@@ -24,9 +25,9 @@ export const Users = ({ onClick }) => {
               xs={3}
               sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor }}
               gap={'10px'}
-              onClick={() => onClick(x)}
+              onClick={() => onClick && onClick(x)}
             >
-              <Avatar src={x.avatar} />
+              <Avatar sx={{ bgcolor: stringToColor(x.firstName) }}>{x.firstName.charAt(0)}</Avatar>
               <Typography color='grey.600'>{`${x.firstName} ${x.lastName}`}</Typography>
             </Grid>
           ))}

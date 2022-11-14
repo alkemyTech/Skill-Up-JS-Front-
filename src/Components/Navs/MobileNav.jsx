@@ -2,11 +2,14 @@ import { AppBar, Avatar, Box, Button, Icon, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
-import { CustomNavLink } from './CustomNavLink'
+import { useSelector } from 'react-redux'
 import { ModalUserProfile } from '../../pages/Profile/ModalUserProfile'
+import { CustomNavLink } from './CustomNavLink'
 
 export const MobileNav = ({ pages, img, logout }) => {
   const [open, setOpen] = useState(false)
+  const user = useSelector((state) => state.user.user)
+
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden'
     return () => {
@@ -36,14 +39,15 @@ export const MobileNav = ({ pages, img, logout }) => {
             AlkyBank
           </Typography>
           <Avatar
-            onClick={() => setOpen((prev) => !prev)}
             sx={{
               width: 31,
               height: 31,
               cursor: 'pointer'
             }}
-            src={img}
-          />
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            {user?.firstName?.charAt(0)}
+          </Avatar>
         </Container>
       </AppBar>
       <Box

@@ -56,14 +56,13 @@ export const AdminMove = ({ variant, data }) => {
           <Icon>{icon}</Icon>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant='subtitle2'>{data.description}</Typography>
+          <Typography variant='subtitle2'>Id del usuario: {data.userId}</Typography>
           <Typography color='grey.400'>{data.date.slice(0, 10)}</Typography>
         </Box>
       </Box>
       <div>
         <Typography variant='subtitle2' color={baseStyle.color} sx={baseStyle.money}>
-          {variant === 'outcome' && '-'}
-          {data.amount}
+          {variant === 2 && '-'}${data.amount}
         </Typography>
       </div>
     </Box>

@@ -1,6 +1,7 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { MobileNav } from './MobileNav'
@@ -11,6 +12,7 @@ export const Navbar = () => {
   const theme = useTheme()
   const match = useMediaQuery(theme.breakpoints.up('md'))
   const navigate = useNavigate()
+  const user = useSelector((state) => state.user.user)
 
   const logout = () => {
     localStorage.clear()
@@ -48,7 +50,7 @@ export const Navbar = () => {
             icon: 'category'
           },
           {
-            text: 'Users',
+            text: 'Usuarios',
             route: 'admin/users',
             icon: 'groups'
           }
@@ -56,7 +58,6 @@ export const Navbar = () => {
 
   const propPack = {
     pages,
-    img: '',
     logout
   }
 
