@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import {Box} from '@mui/material'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
