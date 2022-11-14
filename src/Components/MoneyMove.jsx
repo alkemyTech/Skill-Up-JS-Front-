@@ -51,29 +51,22 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
   const leadingActions = () => {
     return (
       <LeadingActions>
-        <SwipeAction
-          onClick={async () => {
-            try {
-              await dispatch(deleteTransaction(data.id))
-              await dispatch(getTransactions()).then(() => dispatch(getBalance()))
-              alert.confirmation(true, 'Operacion', 'La operacion se elemino correctamente')
-              setCurrentTransaction({})
-            } catch (e) {
-              console.log(e.message)
-              alert.error(true, 'Error', e.message)
-            }
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: '#f1dedb',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '10px'
-            }}
-          >
-            <DeleteIcon />
-            <Typography variant='subtitle2'>Eleminar</Typography>
+
+        <SwipeAction onClick={ async() => {
+          try {
+            await dispatch(deleteTransaction(data.id))
+            await dispatch(getTransactions()).then(() => dispatch(getBalance()))
+            alert.confirmation(true, 'Operacion', 'La operacion se elemino correctamente')
+            setCurrentTransaction({})
+          } catch (e) {
+            console.log(e.message)
+            alert.error(true, 'Error', e.message)
+          }
+        }}>
+          <Box sx={{ backgroundColor: '#f1dedb', display: 'flex', alignItems: 'center', padding: '10px' }}>
+            <DeleteIcon/>
+            <Typography variant='subtitle2'>Eliminar</Typography>
+
           </Box>
         </SwipeAction>
       </LeadingActions>
