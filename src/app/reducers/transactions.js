@@ -22,7 +22,7 @@ function transactionReducer(state = initialState, { type, payload }) {
     case ADD_TRANSACTION:
       return {
         ...state,
-        transactions: [...state.transactions, payload]
+        transactions: [payload, ...state.transactions]
       }
     case MY_TRANSACTIONS:
       return {

@@ -47,26 +47,36 @@ export const MoneyMove = ({ variant, data, handleOpen, setCurrentTransaction }) 
   }
 
   const dispatch = useDispatch()
-  const isAdmin = sessionStorage.getItem('role') === 1
   const leadingActions = () => {
     return (
       <LeadingActions>
-
-        <SwipeAction onClick={ async() => {
-          try {
-            await dispatch(deleteTransaction(data.id))
-            await dispatch(getTransactions()).then(() => dispatch(getBalance()))
-            alert.confirmation(true, 'Operacion', 'La operacion se elemino correctamente')
-            setCurrentTransaction({})
-          } catch (e) {
-            console.log(e.message)
-            alert.error(true, 'Error', e.message)
-          }
-        }}>
-          <Box sx={{ backgroundColor: '#f1dedb', display: 'flex', alignItems: 'center', padding: '10px' }}>
-            <DeleteIcon/>
+        <SwipeAction
+          onClick={async () => {
+            try {
+              alert.question('Eliminar transacción', '¿Estas seguro?', 'Confirmar').then((res) => {
+                if (res.isConfirmed) {
+                  dispatch(deleteTransaction(data.id))
+                  dispatch(getTransactions()).then(() => dispatch(getBalance()))
+                  alert.confirmation(true, 'Operacion', 'La operacion se elimino correctamente')
+                  setCurrentTransaction({})
+                }
+              })
+            } catch (e) {
+              console.log(e.message)
+              alert.error(true, 'Error', e.message)
+            }
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: '#f1dedb',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px'
+            }}
+          >
+            <DeleteIcon />
             <Typography variant='subtitle2'>Eliminar</Typography>
-
           </Box>
         </SwipeAction>
       </LeadingActions>
