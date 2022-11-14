@@ -14,17 +14,19 @@ export const ModalUserProfile = () => {
 
   return (
     <Box>
-        <Button onClick={handleOpenUserProfile}><Icon>person</Icon> User profile</Button>
-        <Modal
+      <Button onClick={handleOpenUserProfile}>
+        <Icon>person</Icon> User profile
+      </Button>
+      <Modal
         open={open}
         onClose={handleCloseUserProfile}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-        >
-          <Box>
-            <UserProfile/>
-          </Box>
-        </Modal>
+        aria-labelledby='parent-modal-title'
+        aria-describedby='parent-modal-description'
+      >
+        <Box>
+          <UserProfile />
+        </Box>
+      </Modal>
     </Box>
   )
 }

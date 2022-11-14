@@ -13,17 +13,19 @@ export const ModalChangePassword = () => {
   }
   return (
     <Box sx={{ m: 1 }}>
-        <CustomButton sx={{ width: 220 }} onClick={handleOpenChangePassword}>Cambiar contraseña</CustomButton>
-        <Modal
+      <CustomButton sx={{ width: 220 }} onClick={handleOpenChangePassword}>
+        Cambiar contraseña
+      </CustomButton>
+      <Modal
         open={openChangePassword}
         onClose={handleCloseChangePassword}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-        >
-            <Box>
-              <ChangePassword handleCloseChangePassword={handleCloseChangePassword} />
-            </Box>
-        </Modal>
+        aria-labelledby='parent-modal-title'
+        aria-describedby='parent-modal-description'
+      >
+        <Box>
+          <ChangePassword handleCloseChangePassword={handleCloseChangePassword} />
+        </Box>
+      </Modal>
     </Box>
   )
 }

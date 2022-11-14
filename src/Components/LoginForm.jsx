@@ -17,7 +17,7 @@ export const LoginForm = () => {
     password: yup
       .string()
       .min(6, 'Debe tener minimo 6 caracteres')
-      .required('Debe ingresar una password')
+      .required('Debe ingresar una contraseña')
   })
 
   return (

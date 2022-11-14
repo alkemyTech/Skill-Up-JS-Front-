@@ -71,14 +71,16 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
   return (
     <Card sx={{ ...styleCard }}>
       <CardContent sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-        <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>Cambiar contraseña</Typography>
+        <Typography variant='h4' sx={{ mb: 5, mt: 2 }}>
+          Cambiar contraseña
+        </Typography>
         <TextField
           fullWidth
           sx={{ mb: 2 }}
-          id="currentPassword"
-          name="currentPassword"
-          label="Contraseña actual"
-          type="password"
+          id='currentPassword'
+          name='currentPassword'
+          label='Contraseña actual'
+          type='password'
           value={formik.values.currentPassword}
           onChange={formik.handleChange}
           error={formik.touched.currentPassword && Boolean(formik.errors.currentPassword)}
@@ -87,10 +89,10 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
         <TextField
           fullWidth
           sx={{ mb: 2 }}
-          id="newPassword"
-          name="newPassword"
-          label="Nueva contraseña"
-          type="password"
+          id='newPassword'
+          name='newPassword'
+          label='Nueva contraseña'
+          type='password'
           value={formik.values.newPassword}
           onChange={formik.handleChange}
           error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
@@ -99,10 +101,10 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
         <TextField
           fullWidth
           sx={{ mb: 2 }}
-          id="passwordConfirmation"
-          name="passwordConfirmation"
-          label="Confirma tu contraseña"
-          type="password"
+          id='passwordConfirmation'
+          name='passwordConfirmation'
+          label='Confirma tu contraseña'
+          type='password'
           value={formik.values.passwordConfirmation}
           onChange={formik.handleChange}
           error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
@@ -110,7 +112,9 @@ export const ChangePassword = ({ handleCloseChangePassword }) => {
         />
       </CardContent>
       <CardActions sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-        <CustomButton onClick={formik.handleSubmit} sx={{ ml: 2, mr: 2, width: 200 }}>Cambiar</CustomButton>
+        <CustomButton onClick={formik.handleSubmit} sx={{ ml: 2, mr: 2, width: 200 }}>
+          Cambiar
+        </CustomButton>
       </CardActions>
     </Card>
   )

@@ -37,90 +37,93 @@ export const FormEdit = ({ handleCloseEditUser }) => {
   return (
     <Card sx={{ ...styleCard }}>
       <Formik
-                initialValues={{
-                  firstName: userStoreData.user.firstName,
-                  lastName: userStoreData.user.lastName,
-                  email: userStoreData.user.email,
-                  avatar: userStoreData.user.avatar,
-                  roleId: 2
-                }}
-                validationSchema={registerSchema}
-                onSubmit={async (values, { resetForm }) => {
-                  try {
-                    await updateUser(values)
-                    alert.confirmation(true, 'Actualizado con éxito', 'Has actualizado tu perfil')
-                    resetForm()
-                  } catch (e) {
-                    alert.error(true, 'Error', e.message)
-                  }
-                }}>
-                {({ touched, errors, values, handleBlur, handleChange }) => (
-                    <Form>
-                      <CardContent>
-                          <Typography variant='h4' sx={{ mb: 5, mt: 1 }}>Editar usuario</Typography>
-                          <TextField
-                              sx={{ mb: 2 }}
-                              error={touched.firstName && errors.firstName}
-                              value={values.firstName}
-                              onBlur={handleBlur}
-                              onChange={handleChange}
-                              label="Nombre"
-                              helperText={touched.firstName && errors.firstName}
-                              variant="standard"
-                              type='text'
-                              name='firstName'
-                              fullWidth
-                              margin="dense"
-                          />
-                          <TextField
-                            sx={{ mb: 2 }}
-                            error={touched.lastName && errors.lastName}
-                            value={values.lastName}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            label="Apellido"
-                            helperText={touched.lastName && errors.lastName}
-                            variant="standard"
-                            type='text'
-                            name='lastName'
-                            fullWidth
-                            margin="dense"
-                          />
-                          <TextField
-                            sx={{ mb: 2 }}
-                            error={touched.email && errors.email}
-                            value={values.email}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            label="Email"
-                            helperText={touched.email && errors.email}
-                            variant="standard"
-                            type='email'
-                            name='email'
-                            fullWidth
-                            margin="dense"
-                          />
-                          <TextField
-                            sx={{ mb: 2 }}
-                            value={values.avatar}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            label="Avatar"
-                            variant="standard"
-                            type='text'
-                            name='Avatar'
-                            fullWidth
-                            margin="dense"
-                          />
-                      </CardContent>
-                      <CardActions sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
-                        <CustomButton sx={{ ml: 2, mr: 2, mt: 2, width: 200 }} type="submit">
-                            Actualizar datos
-                        </CustomButton>
-                      </CardActions>
-                    </Form>
-                )}
-        </Formik>
-      </Card>
+        initialValues={{
+          firstName: userStoreData.user.firstName,
+          lastName: userStoreData.user.lastName,
+          email: userStoreData.user.email,
+          avatar: userStoreData.user.avatar,
+          roleId: 2
+        }}
+        validationSchema={registerSchema}
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            await updateUser(values)
+            alert.confirmation(true, 'Actualizado con éxito', 'Has actualizado tu perfil')
+            resetForm()
+          } catch (e) {
+            alert.error(true, 'Error', e.message)
+          }
+        }}
+      >
+        {({ touched, errors, values, handleBlur, handleChange }) => (
+          <Form>
+            <CardContent>
+              <Typography variant='h4' sx={{ mb: 5, mt: 1 }}>
+                Editar usuario
+              </Typography>
+              <TextField
+                sx={{ mb: 2 }}
+                error={touched.firstName && errors.firstName}
+                value={values.firstName}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                label='Nombre'
+                helperText={touched.firstName && errors.firstName}
+                variant='standard'
+                type='text'
+                name='firstName'
+                fullWidth
+                margin='dense'
+              />
+              <TextField
+                sx={{ mb: 2 }}
+                error={touched.lastName && errors.lastName}
+                value={values.lastName}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                label='Apellido'
+                helperText={touched.lastName && errors.lastName}
+                variant='standard'
+                type='text'
+                name='lastName'
+                fullWidth
+                margin='dense'
+              />
+              <TextField
+                sx={{ mb: 2 }}
+                error={touched.email && errors.email}
+                value={values.email}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                label='Email'
+                helperText={touched.email && errors.email}
+                variant='standard'
+                type='email'
+                name='email'
+                fullWidth
+                margin='dense'
+              />
+              <TextField
+                sx={{ mb: 2 }}
+                value={values.avatar}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                label='Avatar'
+                variant='standard'
+                type='text'
+                name='Avatar'
+                fullWidth
+                margin='dense'
+              />
+            </CardContent>
+            <CardActions sx={{ mt: 6, display: 'flex', justifyContent: 'center' }}>
+              <CustomButton sx={{ ml: 2, mr: 2, mt: 2, width: 200 }} type='submit'>
+                Actualizar datos
+              </CustomButton>
+            </CardActions>
+          </Form>
+        )}
+      </Formik>
+    </Card>
   )
 }
